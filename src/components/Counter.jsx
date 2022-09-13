@@ -1,12 +1,6 @@
-import React, {useState, useEffect} from 'react'
+import React from 'react'
 
-const Counter = () => {
-  const defaultTime = 60;
-  const [counter, setCounter] = useState(defaultTime);
-  
-  useEffect(() => {
-    counter > 0 && setTimeout(() => setCounter(counter - 1), 1000);
-  }, [counter]);
+const Counter = ({counter}) => {
   
   return (
     <div>Remaining: {counter}</div>

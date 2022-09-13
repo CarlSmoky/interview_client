@@ -1,12 +1,14 @@
 import React from 'react';
 
 
-const Button = () => {
+const Button = ({start, pause, stop}) => {
+  
+
   return (
     <div>
-    <button className="" type="">Start</button>
-    <button className="" type="">Pause</button>
-    <button className="" type="">Stop</button>
+    <button className="" onClick={start} >Start</button>
+    <button className="" onClick={pause} >Pause</button>
+    <button className="" onClick={stop} >Stop</button>
     </div>
   )
 }
