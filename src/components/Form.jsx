@@ -1,35 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 
-const Form = ({parameters, handleOnChange, handleClick}) => {
-
-  // const defaultParam = {
-  //   numberOfQuestion: 3,
-  //   preparingTime: 60,
-  //   answeringTime: 90,
-  // }
-  
-  // const [parameters, setParameters] = useState({
-  //   numberOfQuestion: defaultParam.numberOfQuestion,
-  //   preparingTime: defaultParam.preparingTime,
-  //   answeringTime: defaultParam.answeringTime
-  // });
-
-  // const handleOnChange = (event) => {
-  //   const { name, value } = event.target;
-  //   setParameters((prev) => {
-  //     return {
-  //       ...prev,
-  //       [name]: parseInt(value)
-  //     };
-  //   });
-  // }
-
-  // const handleClick = (event) => {
-  //   event.preventDefault();
-  // };
+const Form = ({parameters, handleOnChange, onSave}) => {
 
   return (
-    <form onSubmit={handleClick}>
+    <form onSubmit={onSave}>
       <div className='config-box'>
         <label htmlFor='numberOfQuestion'>How many questions?</label>
         <input className='config' name='numberOfQuestion' onChange={handleOnChange} value={parameters.numberOfQuestion}></input>

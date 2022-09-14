@@ -1,9 +1,9 @@
 import React from 'react'
 
-const Counter = ({counter}) => {
+const Counter = ({counter, text}) => {
   
   return (
-    <div>Remaining: {counter}</div>
+    <div>{text} {counter}</div>
   )
 }
 
