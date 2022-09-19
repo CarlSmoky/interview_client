@@ -23,15 +23,16 @@ const App = () => {
   }, []);
 
   const defaultParam = {
-    numberOfQuestion: 3,
-    preparingTime: 5,
-    answeringTime: 10,
+    // numberOfQuestion: 3,
+    // preparingTime: 5,
+    // answeringTime: 10,
+    numberOfQuestion: 2,
+    preparingTime: 2,
+    answeringTime: 2,
   }
 
   const [parameters, setParameters] = useState({
-    numberOfQuestion: defaultParam.numberOfQuestion,
-    preparingTime: defaultParam.preparingTime,
-    answeringTime: defaultParam.answeringTime
+    ...defaultParam
   });
 
   const handleOnChange = (event) => {
@@ -78,11 +79,15 @@ const App = () => {
     setPrepareCounter(parameters.preparingTime + readingQuestionTime)
   }
 
+  const hasRemainingQuestions = () => {
+    return indexOfQuestion < questions.length - 1;
+  }
+
   useEffect(() => {
     answerCounter > 0 && setTimeout(() => {
       const newTime = answerCounter - 1;
       setAnswerCounter(newTime);
-      if (newTime === 0) {
+      if (newTime === 0 && hasRemainingQuestions()) {
         startNewQuestion();
       }
     }, 1000);
@@ -102,8 +107,6 @@ const App = () => {
           indexOfQuestion={indexOfQuestion}
           prepareCounter={prepareCounter}
           prepTime={parameters.preparingTime}
-          prepText={"Preparing time: "}
-          answerText={"Answering remaining: "}
           answerCounter={answerCounter}
         />
       </div>
