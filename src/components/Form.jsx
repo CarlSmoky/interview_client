@@ -17,7 +17,7 @@ const Form = ({ parameters, handleOnChange, onSave }) => {
           <label className="config-box__label" htmlFor="answeringTime">Answering time(s)</label>
           <input className='config-box__input' name='answeringTime' onChange={handleOnChange} value={parameters.answeringTime}></input>
         </div>
-        <button className="submit-button" type="submit">Start</button>
+        <button className="submit-button button" type="submit">Start</button>
       </form>
     </section>
   )

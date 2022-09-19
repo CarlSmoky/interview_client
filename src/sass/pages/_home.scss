@@ -13,6 +13,11 @@
   text-align: left;
 }
 
+.counter_box {
+  display: flex;
+  flex-direction:row;
+}
+
 .section-main_view {
   width: 100%;
 }
