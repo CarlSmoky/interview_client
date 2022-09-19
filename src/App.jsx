@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react';
+import Header from './components/Header';
+import Footer from './components/Footer';
 import Form from './components/Form';
 import Counter from './components/Counter';
-import DisplayQuestion from './components/DisplayQuestion';
 import Button from './components/Button';
+import Question from './components/Question';
 import axios from 'axios';
+import "./sass/main.scss";
 
 const App = () => {
   const shuffle = (array, n) => {
@@ -75,14 +78,14 @@ const App = () => {
 
   //Counter
   useEffect(() => {
-      prepareCounter > 0 && setTimeout(() => {
-        const newTime = prepareCounter - 1;
-        setPrepareCounter(newTime);
-        setCurrentQuestion(questions[indexOfQuestion].question);
-        if (newTime === 0) {
-          setAnswerCounter(parameters.answeringTime)
-        }
-      }, 1000);
+    prepareCounter > 0 && setTimeout(() => {
+      const newTime = prepareCounter - 1;
+      setPrepareCounter(newTime);
+      setCurrentQuestion(questions[indexOfQuestion].question);
+      if (newTime === 0) {
+        setAnswerCounter(parameters.answeringTime)
+      }
+    }, 1000);
   }, [prepareCounter]);
 
   const startNewQuestion = () => {
@@ -93,23 +96,30 @@ const App = () => {
   }
 
   useEffect(() => {
-      answerCounter > 0 && setTimeout(() => {
-        const newTime = answerCounter - 1;
-        setAnswerCounter(newTime);
-        if (newTime === 0) {
-          startNewQuestion();
-        }
-      }, 1000);
+    answerCounter > 0 && setTimeout(() => {
+      const newTime = answerCounter - 1;
+      setAnswerCounter(newTime);
+      if (newTime === 0) {
+        startNewQuestion();
+      }
+    }, 1000);
   }, [answerCounter]);
 
   return (
     <div className="App">
-      <h1>Inteview</h1>
-      <Form handleOnChange={handleOnChange} onSave={save} parameters={parameters} />
-      <DisplayQuestion question={currentQuestion} />
-      {prepareCounter > 0 && prepareCounter <= parameters.preparingTime && <Counter counter={prepareCounter} text={"Preparing time: "}/>}
-      {answerCounter > 0 && <Counter counter={answerCounter} text={"Answering remaining: "}/>}
-      <Button />
+      <Header />
+      <div className="home_container">
+        <div className="settings">
+          <Form handleOnChange={handleOnChange} onSave={save} parameters={parameters} />
+          <Button />
+        </div>
+        <div className="section-question">
+        {<Question question={currentQuestion} num={indexOfQuestion} />}
+        {prepareCounter > 0 && prepareCounter <= parameters.preparingTime && <Counter counter={prepareCounter} text={"Preparing time: "} />}
+        {answerCounter > 0 && <Counter counter={answerCounter} text={"Answering remaining: "} />}
+        </div>
+      </div>
+      <Footer />
     </div>
   );
 }
