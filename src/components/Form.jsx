@@ -6,18 +6,18 @@ const Form = ({ parameters, handleOnChange, onSave }) => {
     <section className="section-configration">
       <form onSubmit={onSave}>
         <div className='config-box'>
-          <label htmlFor='numberOfQuestion'>How many questions?</label>
-          <input className='config' name='numberOfQuestion' onChange={handleOnChange} value={parameters.numberOfQuestion}></input>
+          <label className="config-box__label" htmlFor='numberOfQuestion'>How many questions?</label>
+          <input className='config-box__input' name='numberOfQuestion' onChange={handleOnChange} value={parameters.numberOfQuestion}></input>
         </div>
         <div className='config-box'>
-          <label htmlFor="preparingTime">Preparing time(s)</label>
-          <input className='config' name='preparingTime' onChange={handleOnChange} value={parameters.preparingTime}></input>
+          <label className="config-box__label" htmlFor="preparingTime">Preparing time(s)</label>
+          <input className='config-box__input' name='preparingTime' onChange={handleOnChange} value={parameters.preparingTime}></input>
         </div>
         <div className='config-box'>
-          <label htmlFor="answeringTime">Answering time(s)</label>
-          <input className='config' name='answeringTime' onChange={handleOnChange} value={parameters.answeringTime}></input>
+          <label className="config-box__label" htmlFor="answeringTime">Answering time(s)</label>
+          <input className='config-box__input' name='answeringTime' onChange={handleOnChange} value={parameters.answeringTime}></input>
         </div>
-        <button type="submit">Start</button>
+        <button className="submit-button" type="submit">Start</button>
       </form>
     </section>
   )

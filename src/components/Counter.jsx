@@ -3,9 +3,9 @@ import React from 'react'
 const Counter = ({counter, text}) => {
   
   return (
-    <section className="section-counter">
+    <div className="counter">
       <p className="counter__text">{text} {counter}</p>
-    </section>
+    </div>
   )
 }
 

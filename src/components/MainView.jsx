@@ -2,7 +2,10 @@ import Question from './Question';
 import Counter from './Counter';
 import Button from './Button';
 
-const MainView = ({currentQuestion, indexOfQuestion, prepareCounter, prepTime, prepText, answerText, answerCounter}) => {
+const answerText = "Answering remaining: ";
+const prepText = "Preparaton time: "
+
+const MainView = ({currentQuestion, indexOfQuestion, prepareCounter, prepTime, answerCounter}) => {
   return (
     <section className="section-main_view"> 
     {<Question question={currentQuestion} num={indexOfQuestion} />}

@@ -92,16 +92,19 @@ const App = () => {
     <div className="App">
       <Header />
       <div className="home_container">
-        <SessionSettings handleOnChange={handleOnChange}
-        save={save}
-        parameters={parameters}/>
-        <MainView currentQuestion={currentQuestion}
-        indexOfQuestion={indexOfQuestion}
-        prepareCounter={prepareCounter}
-        prepTime={parameters.preparingTime}
-        prepText={"Preparing time: "}
-        answerText={"Answering remaining: "}
-        answerCounter={answerCounter}
+        <SessionSettings
+          handleOnChange={handleOnChange}
+          save={save}
+          parameters={parameters}
+        />
+        <MainView
+          currentQuestion={currentQuestion}
+          indexOfQuestion={indexOfQuestion}
+          prepareCounter={prepareCounter}
+          prepTime={parameters.preparingTime}
+          prepText={"Preparing time: "}
+          answerText={"Answering remaining: "}
+          answerCounter={answerCounter}
         />
       </div>
       <Footer />
