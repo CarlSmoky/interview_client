@@ -1,30 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import Header from './components/Header';
 import Footer from './components/Footer';
-import Form from './components/Form';
-import Counter from './components/Counter';
-import Button from './components/Button';
-import Question from './components/Question';
+import SessionSettings from './components/SessionSettings';
+import MainView from './components/MainView';
 import axios from 'axios';
 import "./sass/main.scss";
 
+import { shuffle } from './helpers/shuffle-helper'
+
 const App = () => {
-  const shuffle = (array, n) => {
-    let currentIndex = array.length, randomIndex;
-
-    // While there remain elements to shuffle.
-    while (currentIndex != 0) {
-
-      // Pick a remaining element.
-      randomIndex = Math.floor(Math.random() * currentIndex);
-      currentIndex--;
-
-      // And swap it with the current element.
-      [array[currentIndex], array[randomIndex]] = [
-        array[randomIndex], array[currentIndex]];
-    }
-    return array.slice(0, n);
-  }
 
   //Fetch all questions when it load
   const [allQuestions, setAllQuestions] = useState();
@@ -40,8 +24,8 @@ const App = () => {
 
   const defaultParam = {
     numberOfQuestion: 3,
-    preparingTime: 60,
-    answeringTime: 90,
+    preparingTime: 5,
+    answeringTime: 10,
   }
 
   const [parameters, setParameters] = useState({
@@ -61,13 +45,12 @@ const App = () => {
   }
 
   //When submit bottom clicked, set question accoring to Num of question and start counter
-
   const [questions, setQuestions] = useState([]);
   const [indexOfQuestion, setIndexOfQuestion] = useState(0);
   const [currentQuestion, setCurrentQuestion] = useState("");
   const [prepareCounter, setPrepareCounter] = useState(0);
   const [answerCounter, setAnswerCounter] = useState(0);
-  const readingQuestionTime = 15;
+  const readingQuestionTime = 1;
 
   const save = (event) => {
     event.preventDefault();
@@ -109,15 +92,17 @@ const App = () => {
     <div className="App">
       <Header />
       <div className="home_container">
-        <div className="settings">
-          <Form handleOnChange={handleOnChange} onSave={save} parameters={parameters} />
-          <Button />
-        </div>
-        <div className="section-question">
-        {<Question question={currentQuestion} num={indexOfQuestion} />}
-        {prepareCounter > 0 && prepareCounter <= parameters.preparingTime && <Counter counter={prepareCounter} text={"Preparing time: "} />}
-        {answerCounter > 0 && <Counter counter={answerCounter} text={"Answering remaining: "} />}
-        </div>
+        <SessionSettings handleOnChange={handleOnChange}
+        save={save}
+        parameters={parameters}/>
+        <MainView currentQuestion={currentQuestion}
+        indexOfQuestion={indexOfQuestion}
+        prepareCounter={prepareCounter}
+        prepTime={parameters.preparingTime}
+        prepText={"Preparing time: "}
+        answerText={"Answering remaining: "}
+        answerCounter={answerCounter}
+        />
       </div>
       <Footer />
     </div>
