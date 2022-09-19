@@ -1,0 +1,41 @@
+*,
+::after,
+::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  // This defines what 1 rem is 10px
+  font-size: 62.5%; //1 rem = 10px: 10px/16px = 62.5%
+}
+
+a:link,
+a:hover,
+a:visited,
+a:active {
+  text-decoration: inherit;
+  color: inherit;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+}
+
+ol,
+ul,
+li {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.App {
+  text-align: center;
+}

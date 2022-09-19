@@ -1,0 +1,22 @@
+.question {
+  display: flex;
+  flex-direction:column;
+
+
+  &__number {
+    font-size: $font-size-big;
+  }
+
+  &__content {
+    font-size: $font-size-huge;
+  }
+  
+}
+
+@media screen and (max-width: 800px) {
+  
+}
+
+@media screen and (max-width: 500px) {
+  
+}

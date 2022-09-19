@@ -1,0 +1,183 @@
+body {
+  font-family: $primary-font;
+  background: $color-primary;
+  color: $color-grey-dark;
+  line-height: 1.7;
+  text-decoration: none;
+}
+
+.heading-primary {
+  /* To stop shaking */
+  backface-visibility: hidden;
+
+  &--main {
+    color: $color-grey-dark;
+    letter-spacing: 3rem;
+    margin-bottom: 1rem;
+    font-size: 6rem;
+    font-weight: $font-weight-big;
+    line-height: 1.4;
+  }
+
+  &--sub {
+    color: #999;
+    letter-spacing: 1.8rem;
+    margin-bottom: 1.5rem;
+    font-size: 4rem;
+    font-weight: $font-weight-medium;
+    line-height: 1.4;
+  }
+}
+
+.heading-secondary {
+  position: absolute;
+  left: 10%;
+  color: #999;
+  letter-spacing: 2rem;
+  margin: 4rem 0 4rem;
+  font-size: $font-size-huge;
+  font-weight: $font-weight-small;
+  line-height: 1;
+  text-transform: uppercase;
+  text-align: left;
+}
+
+.heading-tertiary {
+  font-size: $font-size-big;
+  font-weight: $font-weight-small;
+  text-transform: uppercase;
+  text-align: left;
+}
+
+.header__paragraph {
+  font-family: $secondary-font;
+  max-width: 70rem;
+  font-size: $font-size-big;
+  padding-top: 1.4rem;
+}
+
+.card-bottom__content {
+  text-align: left;
+  font-family: $secondary-font;
+  
+  &--text {
+    font-size: $font-size-medium;
+    text-align: left;
+    &:not(:last-child) {
+      margin-bottom: 1rem;
+    }
+  }
+
+  &--stack {
+    text-align: left;
+    font-size: $default-font-size;
+    font-family: $primary-font;
+    line-height: 2;
+    margin-left: 1rem;
+  }
+}
+
+
+.project-title {
+  font-family: $primary-font;
+}
+
+.list {
+  font-family: $secondary-font;
+  font-size: $default-font-size;
+  font-weight: $font-weight-medium;
+}
+
+.placeholder {
+  font-size: 2rem;
+  font-family: $secondary-font;
+  font-weight: $font-weight-medium;
+}
+
+.label {
+  font-size: 2rem;
+  font-family: $secondary-font;
+  ;
+  font-weight: $font-weight-medium;
+}
+
+.button {
+  font-size: 2rem;
+  font-family: $secondary-font;
+  ;
+  font-weight: $font-weight-medium;
+}
+
+
+@media screen and (max-width: 500px) {
+
+  .heading-primary {
+
+    &--main {
+      font-size: $font-size-huge;
+      letter-spacing: 1rem;
+    }
+
+    &--sub {
+      font-size: $font-size-medium;
+      letter-spacing: .3rem;
+    }
+  }
+
+  .heading-secondary {
+    font-size: $font-size-big;
+  }
+
+  .heading-tertiary {
+    font-size: $font-size-medium;
+  }
+
+  .header__paragraph {
+    // max-width: 30rem;
+    font-size: $font-size-small;
+  }
+
+  .placeholder {
+    font-size: 1.5rem;
+    font-weight: $font-weight-small;
+  }
+
+  .label {
+    font-size: 1.5rem;
+    font-weight: $font-weight-small;
+  }
+
+  .button {
+    font-size: 1.5rem;
+    font-weight: $font-weight-big;
+  }
+
+  .project-title {
+    font-family: $primary-font;
+  }
+
+  .card-bottom__content {
+    &--text {
+      font-family: $secondary-font;
+      font-size: $font-size-small;
+
+      &:not(:last-child) {
+        margin-bottom: 1rem;
+      }
+    }
+
+    &--stack {
+      font-size: $font-size-small;
+      line-height: 1;
+    }
+  }
+
+  .list {
+    font-family: $secondary-font;
+    font-size: $font-size-small;
+    font-weight: $font-weight-small;
+  }
+  
+
+
+}
