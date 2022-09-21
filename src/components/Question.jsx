@@ -8,7 +8,7 @@ const Question = ({ num, question, isDimmed }) => {
   return (
     <section className="section-question">
       <div className="question">
-        <span className="question__number">{questionNumberText()}</span>
+        <span className={`question__number ${isDimmed ? "dimmed" : ""}`}>{questionNumberText()}</span>
         <p className={`question__content ${isDimmed ? "dimmed" : ""}`}>{question}</p>
       </div>
     </section>
