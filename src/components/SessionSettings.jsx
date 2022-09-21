@@ -1,9 +1,10 @@
 import Form from './Form';
 
-const SessionSettings = ({handleOnChange, startSession, parameters}) => {
+const SessionSettings = ({handleOnChange, startSession, parameters, defaultChecked}) => {
   return (
     <section className="section-session_settings"> 
-    <Form handleOnChange={handleOnChange} onSave={startSession} parameters={parameters} />
+    <h1>Before Start</h1>
+    <Form handleOnChange={handleOnChange} onSave={startSession} parameters={parameters} defaultChecked={defaultChecked}/>
   </section>
   )
 }

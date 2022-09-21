@@ -4,7 +4,7 @@
   &__text {
     font-size: $font-size-big;
     text-align: center;
-    padding: 1rem;
+    padding: .8rem;
   }
 }
 
@@ -17,18 +17,18 @@
   &__box {
 
     &-1 {
-      background-color: pink;
-      width: 33%;
+      background-color: $color-grey-light-2;
+      width: 33.3%;
     }
 
     &-2 {
-      background-color: blueviolet;
-      width: 33%;
+      background-color: $color-grey-dark-2;
+      width: 33.3%;
     }
 
     &-3 {
-      background-color: green;
-      width: 33%;
+      background-color: $color-grey-dark-3;
+      width: 33.3%;
     }
 
   }

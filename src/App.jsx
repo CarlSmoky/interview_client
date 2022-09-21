@@ -52,6 +52,10 @@ const App = () => {
   const [readingCounter, setReadingCounter] = useState(0);
   const [prepareCounter, setPrepareCounter] = useState(0);
   const [answerCounter, setAnswerCounter] = useState(0);
+  const [checked, setChecked] = useState(
+    {limitPreparationTime : false,
+      limitAnswaringTime: false,
+    });
 
   const startSession = (event) => {
     event.preventDefault();
@@ -121,6 +125,7 @@ const App = () => {
           handleOnChange={handleOnChange}
           startSession={startSession}
           parameters={parameters}
+          defaultChecked={checked}
         />
         <MainView
           currentQuestion={currentQuestion}
