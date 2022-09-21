@@ -117,6 +117,16 @@ const App = () => {
     return indexOfQuestion < questions.length - 1;
   }
 
+  const checkLimit = (event) => {
+    const { name } = event.target;
+    setChecked((prev) => {
+      return {
+        ...prev,
+        [name]: !checked[name]
+      };
+    });
+  }
+
   return (
     <div className="App">
       <Header />
@@ -126,6 +136,7 @@ const App = () => {
           startSession={startSession}
           parameters={parameters}
           defaultChecked={checked}
+          checkLimit={checkLimit}
         />
         <MainView
           currentQuestion={currentQuestion}
