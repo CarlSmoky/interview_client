@@ -1,0 +1,26 @@
+.question {
+  display: flex;
+  flex-direction:column;
+  height: 60vh;
+  text-align: left;
+
+
+  &__number {
+    font-size: $font-size-big;
+  }
+
+  &__content {
+    font-size: $font-size-huge;
+    color: $color-grey-dark;
+    margin: auto;
+  }
+  
+}
+
+@media screen and (max-width: 800px) {
+  
+}
+
+@media screen and (max-width: 500px) {
+  
+}

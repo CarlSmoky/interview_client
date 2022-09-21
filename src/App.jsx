@@ -1,30 +1,19 @@
 import React, { useState, useEffect } from 'react';
-import Form from './components/Form';
-import Counter from './components/Counter';
-import DisplayQuestion from './components/DisplayQuestion';
-import Button from './components/Button';
+import Header from './components/Header';
+import Footer from './components/Footer';
+import SessionSettings from './components/SessionSettings';
+import MainView from './components/MainView';
 import axios from 'axios';
+import "./sass/main.scss";
+
+import { shuffle } from './helpers/shuffle-helper'
 
 const App = () => {
-  const shuffle = (array, n) => {
-    let currentIndex = array.length, randomIndex;
-
-    // While there remain elements to shuffle.
-    while (currentIndex != 0) {
-
-      // Pick a remaining element.
-      randomIndex = Math.floor(Math.random() * currentIndex);
-      currentIndex--;
-
-      // And swap it with the current element.
-      [array[currentIndex], array[randomIndex]] = [
-        array[randomIndex], array[currentIndex]];
-    }
-    return array.slice(0, n);
-  }
 
   //Fetch all questions when it load
   const [allQuestions, setAllQuestions] = useState();
+  const [nextEnabled, setNextEnabled] = useState(false);
+
   useEffect(() => {
     const endpoints = {
       "QUESTIONS": `http://localhost:3001/api/questions`,
@@ -36,15 +25,14 @@ const App = () => {
   }, []);
 
   const defaultParam = {
-    numberOfQuestion: 3,
-    preparingTime: 60,
-    answeringTime: 90,
+    numberOfQuestion: 4,
+    preparingTime: 5,
+    answeringTime: 5,
+    readingQuestionTime: 5,
   }
 
   const [parameters, setParameters] = useState({
-    numberOfQuestion: defaultParam.numberOfQuestion,
-    preparingTime: defaultParam.preparingTime,
-    answeringTime: defaultParam.answeringTime
+    ...defaultParam
   });
 
   const handleOnChange = (event) => {
@@ -57,59 +45,95 @@ const App = () => {
     });
   }
 
-  //When submit bottom clicked, set question accoring to Num of question and start counter
-
+  //When submit btn clicked, set question accoring to Num of question and start counter
   const [questions, setQuestions] = useState([]);
   const [indexOfQuestion, setIndexOfQuestion] = useState(0);
   const [currentQuestion, setCurrentQuestion] = useState("");
+  const [readingCounter, setReadingCounter] = useState(0);
   const [prepareCounter, setPrepareCounter] = useState(0);
   const [answerCounter, setAnswerCounter] = useState(0);
-  const readingQuestionTime = 15;
 
-  const save = (event) => {
+  const startSession = (event) => {
     event.preventDefault();
     const selectedQuestions = shuffle(allQuestions, parameters.numberOfQuestion);
     setQuestions(selectedQuestions);
-    setPrepareCounter(parameters.preparingTime + readingQuestionTime);
+    setReadingCounter(parameters.readingQuestionTime);
+    setCurrentQuestion(selectedQuestions[indexOfQuestion].question);
   };
 
+  // can delete this and access setNextEnabled directly, wrapper function
+  const enableNextButton = (isEnabled) => {
+    setNextEnabled(isEnabled);
+  }
+
   //Counter
+  // reading counter
   useEffect(() => {
-      prepareCounter > 0 && setTimeout(() => {
-        const newTime = prepareCounter - 1;
-        setPrepareCounter(newTime);
-        setCurrentQuestion(questions[indexOfQuestion].question);
-        if (newTime === 0) {
-          setAnswerCounter(parameters.answeringTime)
-        }
-      }, 1000);
+    readingCounter > 0 && setTimeout(() => {
+      const newTime = readingCounter - 1;
+      setReadingCounter(newTime);
+      if (newTime === 0) {
+        setPrepareCounter(parameters.preparingTime)
+      }
+    }, 1000);
+  }, [readingCounter]);
+
+  // prep counter
+  useEffect(() => {
+    prepareCounter > 0 && setTimeout(() => {
+      const newTime = prepareCounter - 1;
+      setPrepareCounter(newTime);
+      if (newTime === 0) {
+        setAnswerCounter(parameters.answeringTime)
+      }
+    }, 1000);
   }, [prepareCounter]);
+
+  // answer counter
+  useEffect(() => {
+    answerCounter > 0 && setTimeout(() => {
+      const newTime = answerCounter - 1;
+      setAnswerCounter(newTime);
+      if (newTime === 0 && hasRemainingQuestions()) {
+        enableNextButton(true);
+      }
+    }, 1000);
+  }, [answerCounter]);
+
 
   const startNewQuestion = () => {
     const newQuestionIndex = indexOfQuestion + 1;
     setIndexOfQuestion(newQuestionIndex);
     setCurrentQuestion(questions[newQuestionIndex].question);
-    setPrepareCounter(parameters.preparingTime + readingQuestionTime)
+    setReadingCounter(parameters.readingQuestionTime)
+    enableNextButton(false);
   }
 
-  useEffect(() => {
-      answerCounter > 0 && setTimeout(() => {
-        const newTime = answerCounter - 1;
-        setAnswerCounter(newTime);
-        if (newTime === 0) {
-          startNewQuestion();
-        }
-      }, 1000);
-  }, [answerCounter]);
+  const hasRemainingQuestions = () => {
+    return indexOfQuestion < questions.length - 1;
+  }
 
   return (
     <div className="App">
-      <h1>Inteview</h1>
-      <Form handleOnChange={handleOnChange} onSave={save} parameters={parameters} />
-      <DisplayQuestion question={currentQuestion} />
-      {prepareCounter > 0 && prepareCounter <= parameters.preparingTime && <Counter counter={prepareCounter} text={"Preparing time: "}/>}
-      {answerCounter > 0 && <Counter counter={answerCounter} text={"Answering remaining: "}/>}
-      <Button />
+      <Header />
+      <div className="home_container">
+        <SessionSettings
+          handleOnChange={handleOnChange}
+          startSession={startSession}
+          parameters={parameters}
+        />
+        <MainView
+          currentQuestion={currentQuestion}
+          indexOfQuestion={indexOfQuestion}
+          prepareCounter={prepareCounter}
+          prepTime={parameters.preparingTime}
+          answerCounter={answerCounter}
+          readingCounter={readingCounter}
+          nextEnabled={nextEnabled}
+          startNewQuestion={startNewQuestion}
+        />
+      </div>
+      <Footer />
     </div>
   );
 }

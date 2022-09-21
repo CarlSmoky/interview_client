@@ -1,0 +1,39 @@
+.counter {
+  text-align: left;
+
+  &__text {
+    font-size: $font-size-big;
+    text-align: center;
+    padding: 1rem;
+  }
+}
+
+.timer {
+  display: flex;
+  flex-direction: row;
+  height: 6rem;
+  width: 100%;
+
+  &__box {
+
+    &-1 {
+      background-color: pink;
+      width: 33%;
+    }
+
+    &-2 {
+      background-color: blueviolet;
+      width: 33%;
+    }
+
+    &-3 {
+      background-color: green;
+      width: 33%;
+    }
+
+  }
+}
+
+.dimmed {
+  opacity: 20%;
+}
