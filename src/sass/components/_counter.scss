@@ -3,13 +3,15 @@
 
   &__text {
     font-size: $font-size-big;
+    text-align: center;
+    padding: 1rem;
   }
 }
 
 .timer {
   display: flex;
   flex-direction: row;
-  height: 10rem;
+  height: 6rem;
   width: 100%;
 
   &__box {
