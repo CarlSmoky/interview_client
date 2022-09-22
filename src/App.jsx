@@ -13,6 +13,7 @@ const App = () => {
   //Fetch all questions when it load
   const [allQuestions, setAllQuestions] = useState();
   const [nextEnabled, setNextEnabled] = useState(false);
+  const [startEnabled, setStartEnabled] = useState(false);
 
   useEffect(() => {
     const endpoints = {
@@ -53,8 +54,8 @@ const App = () => {
   const [prepareCounter, setPrepareCounter] = useState(0);
   const [answerCounter, setAnswerCounter] = useState(0);
   const [checked, setChecked] = useState(
-    {limitPreparationTime : false,
-      limitAnswaringTime: false,
+    {limitPreparationTime : true,
+      limitAnswaringTime: true,
     });
 
   const startSession = (event) => {
@@ -68,6 +69,10 @@ const App = () => {
   // can delete this and access setNextEnabled directly, wrapper function
   const enableNextButton = (isEnabled) => {
     setNextEnabled(isEnabled);
+  }
+
+  const enableStartButton = (isEnabled) => {
+    setStartEnabled(isEnabled);
   }
 
   //Counter
@@ -117,7 +122,7 @@ const App = () => {
     return indexOfQuestion < questions.length - 1;
   }
 
-  const checkLimit = (event) => {
+  const checkUnlimit = (event) => {
     const { name } = event.target;
     setChecked((prev) => {
       return {
@@ -126,6 +131,8 @@ const App = () => {
       };
     });
   }
+
+  
 
   return (
     <div className="App">
@@ -136,7 +143,8 @@ const App = () => {
           startSession={startSession}
           parameters={parameters}
           defaultChecked={checked}
-          checkLimit={checkLimit}
+          checkUnlimit={checkUnlimit}
+          checked={checked}
         />
         <MainView
           currentQuestion={currentQuestion}
