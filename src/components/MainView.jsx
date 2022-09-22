@@ -43,7 +43,12 @@ const MainView = ({ currentQuestion, indexOfQuestion, prepareCounter, prepTime, 
 
       </div>
       {<Question question={currentQuestion} num={indexOfQuestion} isDimmed={questionIsComplete()} />}
+      <button>Start answer</button>
+      <button>done</button>
+      <br />
+      <button>pause</button>
       <Button nextEnabled={nextEnabled} start={startNewQuestion} />
+      
       <div className="counter_box">
         
         

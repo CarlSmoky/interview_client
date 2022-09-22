@@ -13,7 +13,9 @@ const App = () => {
   //Fetch all questions when it load
   const [allQuestions, setAllQuestions] = useState();
   const [nextEnabled, setNextEnabled] = useState(false);
-  const [startEnabled, setStartEnabled] = useState(false);
+  const [mode, setMode] = useState({
+
+  })
 
   useEffect(() => {
     const endpoints = {
@@ -71,9 +73,6 @@ const App = () => {
     setNextEnabled(isEnabled);
   }
 
-  const enableStartButton = (isEnabled) => {
-    setStartEnabled(isEnabled);
-  }
 
   //Counter
   // reading counter
