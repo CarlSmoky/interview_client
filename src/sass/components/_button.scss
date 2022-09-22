@@ -1,91 +1,41 @@
-// .button {
-//   align-items: center;
-//   appearance: none;
-//   background-color: $color-tertiary-dark;
-//   border-radius: 4px;
-//   border-width: 0;
-//   box-shadow: rgba(45, 35, 66, 0.4) 0 2px 4px,rgba(45, 35, 66, 0.3) 0 7px 13px -3px,#D6D6E7 0 -3px 0 inset;
-//   box-sizing: border-box;
-//   color: #36395A;
-//   cursor: pointer;
-//   display: inline-flex;
-//   font-family: "JetBrains Mono",monospace;
-//   height: 48px;
-//   justify-content: center;
-//   line-height: 1;
-//   list-style: none;
-//   overflow: hidden;
-//   padding-left: 16px;
-//   padding-right: 16px;
-//   position: relative;
-//   text-align: left;
-//   text-decoration: none;
-//   transition: box-shadow .15s,transform .15s;
-//   user-select: none;
-//   -webkit-user-select: none;
-//   touch-action: manipulation;
-//   white-space: nowrap;
-//   will-change: box-shadow,transform;
-//   font-size: 18px;
-// }
-
-// .button:focus {
-//   box-shadow: #D6D6E7 0 0 0 1.5px inset, rgba(45, 35, 66, 0.4) 0 2px 4px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #D6D6E7 0 -3px 0 inset;
-// }
-
-// .button:hover {
-//   box-shadow: rgba(45, 35, 66, 0.4) 0 4px 8px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #D6D6E7 0 -3px 0 inset;
-//   transform: translateY(-2px);
-// }
-
-// .button:active {
-//   box-shadow: #D6D6E7 0 3px 7px inset;
-//   transform: translateY(2px);
-// }
-
-.next_btn {
-    width: 100%;
-}
-
-/* CSS */
 .button {
-  background-color: #e1ecf4;
-  border-radius: 3px;
-  border: 1px solid #7aa7c7;
-  box-shadow: rgba(255, 255, 255, .7) 0 1px 0 0 inset;
+  background-color: $color-secondary-dark;
+  border: 1px solid $color-secondary-dark;
+  border-radius: 4px;
+  box-shadow: rgba(0, 0, 0, .1) 0 2px 4px 0;
   box-sizing: border-box;
-  color: #39739d;
+  color: #fff;
   cursor: pointer;
-  display: inline-block;
-  font-family: -apple-system,system-ui,"Segoe UI","Liberation Sans",sans-serif;
-  font-size: 13px;
+  font-family: "Akzidenz Grotesk BQ Medium", -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 16px;
   font-weight: 400;
-  line-height: 1.15385;
-  margin: 0;
   outline: none;
-  padding: 8px .8em;
-  position: relative;
+  outline: 0;
+  padding: 10px 25px;
   text-align: center;
-  text-decoration: none;
+  transform: translateY(0);
+  transition: transform 150ms, box-shadow 150ms;
   user-select: none;
   -webkit-user-select: none;
   touch-action: manipulation;
-  vertical-align: baseline;
-  white-space: nowrap;
 }
 
-.button:hover,
-.button:focus {
-  background-color: #b3d3ea;
-  color: #2c5777;
+.button:hover {
+  box-shadow: rgba(0, 0, 0, .15) 0 3px 9px 0;
+  transform: translateY(-2px);
 }
 
-.button:focus {
-  box-shadow: 0 0 0 4px rgba(0, 149, 255, .15);
+.next_btn {
+  width: 100%;
 }
 
-.button:active {
-  background-color: #a0c7e4;
-  box-shadow: none;
-  color: #2c5777;
+.submit-btn {
+  margin-top: 11rem; //temporary
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .button {
+    padding: 10px 30px;
+  }
 }
