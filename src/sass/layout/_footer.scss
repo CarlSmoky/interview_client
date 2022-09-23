@@ -1,5 +1,20 @@
 .footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
   background-color: $color-primary;
   height: 10rem;
-  border-top: 1px solid grey;
+  // border-top: 1px solid grey;
+  padding: 2rem 15rem;
+  text-align: left;
+
+  &__icons {
+  text-align: right;
+
+    & a {
+      font-size: $font-size-huge;
+      color: $color-tertiary-dark;
+      margin: 2rem;
+    }
+  }
 }
