@@ -29,6 +29,15 @@ body {
   font-size: $font-size-medium; 
 }
 
+.footer-text {
+  display: inline-block;
+  font-family: $secondary-font;
+  font-weight: $font-weight-small;
+  font-size: $font-size-medium;
+  color: $color-tertiary-dark;
+  padding: 3rem 0 0 0 
+}
+
 
 //FONT SIZE
 // $default-font-size: 1.6rem;
