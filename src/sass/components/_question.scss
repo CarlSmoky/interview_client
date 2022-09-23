@@ -3,17 +3,22 @@
   flex-direction:column;
   height: 55rem;;
   text-align: left;
+  line-height: 5rem;
+  border: 1px solid grey;
+  border-radius: 10px;
+  padding: 3rem;
 
 
   &__number {
     font-size: $font-size-big;
+    color: $color-grey-dark;
     margin-top: 3rem;
   }
 
   &__content {
     font-size: $font-size-huge;
     color: $color-grey-dark;
-    margin: auto;
+    margin: 5rem 0 0 0;
   }
   
 }

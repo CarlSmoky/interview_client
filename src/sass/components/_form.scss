@@ -10,20 +10,14 @@
 .config-box {
   display: flex;
   flex-direction: row;
-  font-size: $font-size-big; 
   text-align: left;
   justify-content: space-between;
   
 
-  &__label {
-
-  }
-
   &__input {
     font-size: $font-size-big;
     color: $color-grey-dark-2;
-    text-align: center;
-    
+    text-align: center; 
   }
 
 }
@@ -40,4 +34,5 @@
 .unit {
   font-size: $font-size-small;
   text-align: center;
+  color: $color-grey-dark;
 }

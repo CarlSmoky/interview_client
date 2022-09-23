@@ -9,8 +9,39 @@ body {
 .heading-primary {
   /* To stop shaking */
   backface-visibility: hidden;
-
-  
-
-
 }
+
+.heading-secondary {
+  font-family: $secondary-font;
+  font-weight: $font-weight-small;
+  font-size: $font-size-big;
+  color: $color-secondary-dark;
+}
+
+.heading-tertiary {
+  font-family: $secondary-font;
+  font-weight: $font-weight-small;
+  font-size: $font-size-medium;
+  color: $color-primary-dark;
+}
+
+.label-primary {
+  font-size: $font-size-medium; 
+}
+
+.footer-text {
+  display: inline-block;
+  font-family: $secondary-font;
+  font-weight: $font-weight-small;
+  font-size: $font-size-medium;
+  color: $color-tertiary-dark;
+  padding: 3rem 0 0 0 
+}
+
+
+//FONT SIZE
+// $default-font-size: 1.6rem;
+// $font-size-small: 1.3rem;
+// $font-size-medium: 2rem;
+// $font-size-big: 2.5rem;
+// $font-size-huge: 4rem;

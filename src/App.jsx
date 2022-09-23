@@ -10,10 +10,18 @@ import { shuffle } from './helpers/shuffle-helper'
 
 const App = () => {
 
+  const modes = {
+    before: "before",
+    prep: "prep",
+    answering: "answering",
+    finished: "finished"
+  };
+
+  const [mode, setMode] = useState(modes.before);
+
   //Fetch all questions when it load
   const [allQuestions, setAllQuestions] = useState();
   const [nextEnabled, setNextEnabled] = useState(false);
-  const [startEnabled, setStartEnabled] = useState(false);
 
   useEffect(() => {
     const endpoints = {
@@ -54,7 +62,8 @@ const App = () => {
   const [prepareCounter, setPrepareCounter] = useState(0);
   const [answerCounter, setAnswerCounter] = useState(0);
   const [checked, setChecked] = useState(
-    {limitPreparationTime : true,
+    {
+      limitPreparationTime: true,
       limitAnswaringTime: true,
     });
 
@@ -63,16 +72,12 @@ const App = () => {
     const selectedQuestions = shuffle(allQuestions, parameters.numberOfQuestion);
     setQuestions(selectedQuestions);
     setReadingCounter(parameters.readingQuestionTime);
-    setCurrentQuestion(selectedQuestions[indexOfQuestion].question);
+    setCurrentQuestion(selectedQuestions[0].question);
   };
 
   // can delete this and access setNextEnabled directly, wrapper function
   const enableNextButton = (isEnabled) => {
     setNextEnabled(isEnabled);
-  }
-
-  const enableStartButton = (isEnabled) => {
-    setStartEnabled(isEnabled);
   }
 
   //Counter
@@ -97,6 +102,24 @@ const App = () => {
       }
     }, 1000);
   }, [prepareCounter]);
+
+
+  // // not tested, might not work
+  // useEffect(() => {
+  //   if (mode === modes.prep && prepareCounter > ) {
+
+  //     let prepTimer;
+
+  //     prepTimer = setInterval(() => {
+  //       setPrepareCounter(counter => counter + 1);
+  //       if (prepareCounter >= prepareCounterLimit) {
+  //         setMode(modes.answering);
+  //       }
+  //     }, 1000)
+  //   }
+  //  return () => clearInterval(prepTimer);
+  // }, [prepareCounter, mode]);
+
 
   // answer counter
   useEffect(() => {
@@ -132,7 +155,7 @@ const App = () => {
     });
   }
 
-  
+
 
   return (
     <div className="App">
