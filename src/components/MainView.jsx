@@ -6,8 +6,9 @@ const answerText = "Answering remaining: ";
 const prepText = "Preparaton time: "
 const readingText = "Reading time: "
 
-const MainView = ({ currentQuestion, indexOfQuestion, prepareCounter, prepTime, answerCounter, readingCounter, nextEnabled, startNewQuestion }) => {
+const MainView = ({ currentQuestion, indexOfQuestion, prepareCounter, prepTime, answerCounter, readingCounter, nextEnabled, startNewQuestion, mode }) => {
 
+  //new: these helper funcs needs to change: it should decide the dimming based on the current mode not the timer value
   // helper functions
   const showReadingTimer = () => {
     return readingCounter > 0; 
@@ -22,9 +23,7 @@ const MainView = ({ currentQuestion, indexOfQuestion, prepareCounter, prepTime, 
   }
 
   const questionIsComplete = () => {
-    return !(
-      showAnswerTimer() || showPrepTimer()  || showReadingTimer()
-    )
+    return mode === "finished";  // need to export modes to this file
   }
 
   return (
@@ -47,8 +46,8 @@ const MainView = ({ currentQuestion, indexOfQuestion, prepareCounter, prepTime, 
       <button>done</button>
       <br />
       <button>pause</button>
-      <Button nextEnabled={nextEnabled} start={startNewQuestion} />
-      
+      {/* <Button nextEnabled={nextEnabled} start={startNewQuestion} /> */}
+      <Button nextEnabled={true} start={startNewQuestion} />
       <div className="counter_box">
         
         

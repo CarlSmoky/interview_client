@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import SessionSettings from './components/SessionSettings';
@@ -17,12 +17,11 @@ const App = () => {
     finished: "finished"
   };
 
-  const [mode, setMode] = useState(modes.before);
-
   //Fetch all questions when it load
   const [allQuestions, setAllQuestions] = useState();
   const [nextEnabled, setNextEnabled] = useState(false);
 
+  // on first render
   useEffect(() => {
     const endpoints = {
       "QUESTIONS": `http://localhost:3001/api/questions`,
@@ -31,13 +30,14 @@ const App = () => {
       .then(response => {
         setAllQuestions(response.data);
       });
+      setTimer(false);
   }, []);
 
   const defaultParam = {
     numberOfQuestion: 4,
     preparingTime: 5,
-    answeringTime: 5,
-    readingQuestionTime: 5,
+    answeringTime: 10,
+    readingQuestionTime: 5
   }
 
   const [parameters, setParameters] = useState({
@@ -58,9 +58,17 @@ const App = () => {
   const [questions, setQuestions] = useState([]);
   const [indexOfQuestion, setIndexOfQuestion] = useState(0);
   const [currentQuestion, setCurrentQuestion] = useState("");
-  const [readingCounter, setReadingCounter] = useState(0);
-  const [prepareCounter, setPrepareCounter] = useState(0);
-  const [answerCounter, setAnswerCounter] = useState(0);
+  // for both timers
+  const [counter, setCounter] = useState(0);
+  const counterRef = useRef(0);
+
+  // for pause:
+  const [activeTimer, setActiveTimer] = useState(false);
+  const activeTimerRef = useRef(false);
+
+  const [mode, setMode] = useState(modes.before);
+
+  // not yet being used
   const [checked, setChecked] = useState(
     {
       limitPreparationTime: true,
@@ -71,74 +79,96 @@ const App = () => {
     event.preventDefault();
     const selectedQuestions = shuffle(allQuestions, parameters.numberOfQuestion);
     setQuestions(selectedQuestions);
-    setReadingCounter(parameters.readingQuestionTime);
+    setMode(modes.prep);
     setCurrentQuestion(selectedQuestions[0].question);
+    resetTimer()
   };
+
+  const startNewQuestion = () => {
+    console.log("pressed new q");
+    const newQuestionIndex = indexOfQuestion + 1;
+    setIndexOfQuestion(newQuestionIndex);
+    setCurrentQuestion(questions[newQuestionIndex].question);
+    setMode(modes.prep);
+    resetTimer()
+    enableNextButton(false);
+  }
 
   // can delete this and access setNextEnabled directly, wrapper function
   const enableNextButton = (isEnabled) => {
     setNextEnabled(isEnabled);
   }
 
-  //Counter
-  // reading counter
+  // Next Button:
+  // in prep: move to answering
+  // in answering: move to finished
+  // in finished: start new question
+  // (currently it always calls startNewQuestion)
+
+  // Pause Button:
+  // call toggleTimer()
+
+
+// --- TIMER ---
   useEffect(() => {
-    readingCounter > 0 && setTimeout(() => {
-      const newTime = readingCounter - 1;
-      setReadingCounter(newTime);
-      if (newTime === 0) {
-        setPrepareCounter(parameters.preparingTime)
+    if (!activeTimer) return; // check if timer is paused
+    console.log("counter", counter, "target", currentTimerTarget());
+    if (counter > currentTimerTarget()) { // check if timer is finished
+      handleTimerFinishes()
+    }
+
+    setTimeout(() => {
+      if (activeTimerRef.current) { // make sure we're not paused
+        setCounter(counter + 1);
+        counterRef.current = counter + 1;
       }
     }, 1000);
-  }, [readingCounter]);
+  }, [counter, activeTimer]);
 
-  // prep counter
-  useEffect(() => {
-    prepareCounter > 0 && setTimeout(() => {
-      const newTime = prepareCounter - 1;
-      setPrepareCounter(newTime);
-      if (newTime === 0) {
-        setAnswerCounter(parameters.answeringTime)
-      }
-    }, 1000);
-  }, [prepareCounter]);
+  const handleTimerFinishes = () => {
+    console.log("handle finish fired", mode);
+    if (mode === modes.prep) {
+      setMode(modes.answering);
+      resetTimer();
+    } else if (mode === modes.answering) {
+      setMode(modes.finished);
+      setTimer(false);
+    }
+  }
 
+//  --- TIMER HELPERS ---
 
-  // // not tested, might not work
-  // useEffect(() => {
-  //   if (mode === modes.prep && prepareCounter > ) {
+  // pause will use this function
+  const toggleTimer = () => {
+    setTimer(!activeTimerRef.current);
+  }
+  
+  const setTimer = (isOn) => {
+    setActiveTimer(isOn);
+    activeTimerRef.current = isOn;
+  }
 
-  //     let prepTimer;
-
-  //     prepTimer = setInterval(() => {
-  //       setPrepareCounter(counter => counter + 1);
-  //       if (prepareCounter >= prepareCounterLimit) {
-  //         setMode(modes.answering);
-  //       }
-  //     }, 1000)
-  //   }
-  //  return () => clearInterval(prepTimer);
-  // }, [prepareCounter, mode]);
+  // current timer target depends on mode
 
 
-  // answer counter
-  useEffect(() => {
-    answerCounter > 0 && setTimeout(() => {
-      const newTime = answerCounter - 1;
-      setAnswerCounter(newTime);
-      if (newTime === 0 && hasRemainingQuestions()) {
-        enableNextButton(true);
-      }
-    }, 1000);
-  }, [answerCounter]);
+  /*
+  if you call currentTimerTarget(), it will give the time limit for the current mode
+  if yoy call currentTimerTarget(modes.prep), it will give the time limit for parameters.preparingTime
+  */
+  const currentTimerTarget = (newMode) => {
+    const currentMode = newMode || mode;
 
+    if (currentMode === modes.prep) {
+      return parameters.preparingTime;
+    } else if (currentMode === modes.answering) {
+      return parameters.answeringTime;
+    }
+  }
 
-  const startNewQuestion = () => {
-    const newQuestionIndex = indexOfQuestion + 1;
-    setIndexOfQuestion(newQuestionIndex);
-    setCurrentQuestion(questions[newQuestionIndex].question);
-    setReadingCounter(parameters.readingQuestionTime)
-    enableNextButton(false);
+  const resetTimer = () => {
+    setTimer(true);
+    setCounter(0);
+    counterRef.current = 0;
   }
 
   const hasRemainingQuestions = () => {
@@ -172,12 +202,13 @@ const App = () => {
         <MainView
           currentQuestion={currentQuestion}
           indexOfQuestion={indexOfQuestion}
-          prepareCounter={prepareCounter}
-          prepTime={parameters.preparingTime}
-          answerCounter={answerCounter}
-          readingCounter={readingCounter}
+          prepareCounter={mode === modes.prep && counter}
+          prepTime={currentTimerTarget()}
+          answerCounter={mode === modes.answering && counter}
+          // readingCounter={currentTimerTarget()}
           nextEnabled={nextEnabled}
           startNewQuestion={startNewQuestion}
+          mode={mode}
         />
       </div>
       <Footer />
