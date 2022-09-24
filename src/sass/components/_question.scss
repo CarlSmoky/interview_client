@@ -6,7 +6,7 @@
   line-height: 5rem;
   border: 1px solid grey;
   border-radius: 10px;
-  padding: 3rem;
+  padding: 3rem 8rem;
 
 
   &__number {
@@ -16,7 +16,7 @@
   }
 
   &__content {
-    font-size: $font-size-huge;
+    font-size: $font-size-grand;
     color: $color-grey-dark;
     margin: 5rem 0 0 0;
   }
