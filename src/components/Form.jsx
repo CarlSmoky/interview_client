@@ -35,19 +35,19 @@ const Form = ({ parameters, handleOnChange, start, defaultChecked, isChecked, is
         <div className="setting-wrapper">
           <h3 className="heading-tertiary" >Answer Counter</h3>
           <div className="config-box">
-            <label className={`label-primary ${isChecked('limitAnswaringTime') ? "" : "dimmed"}`} htmlFor="limitAnswaringTime"> Unlimited answaring time</label>
-            <input type="checkbox" id="limitAnswaringTime" name="limitAnswaringTime" value="limitAnswaringTime" defaultChecked={parameters.limitAnswaringTime} onChange={handleOnChange} disabled={isBefore()}/>
+            <label className={`label-primary ${isChecked('limitAnsweringTime') ? "" : "dimmed"}`} htmlFor="limitAnsweringTime"> Unlimited answaring time</label>
+            <input type="checkbox" id="limitAnsweringTime" name="limitAnsweringTime" value="limitAnsweringTime" defaultChecked={parameters.limitAnsweringTime} onChange={handleOnChange} disabled={isBefore()}/>
           </div>
-          <div className={`config-box ${isChecked('limitAnswaringTime') ? "dimmed" : ""}`}>
+          <div className={`config-box ${isChecked('limitAnsweringTime') ? "dimmed" : ""}`}>
             <label className="label-primary" htmlFor="answeringTime">Answering time: </label>
             <div className="time-box">
-              <input className='config-box__input' type="number" min="0" max="300" name='answeringTime' onChange={handleOnChange} value={parameters.answeringTime} maxLength="2" size="4" disabled={isChecked('limitAnswaringTime') || isBefore()} />
+              <input className='config-box__input' type="number" min="0" max="300" name='answeringTime' onChange={handleOnChange} value={parameters.answeringTime} maxLength="2" size="4" disabled={isChecked('limitAnsweringTime') || isBefore()} />
               <span className="unit">seconds</span>
             </div>
           </div>
         </div>
 
-        <button className="submit-btn button" type="submit" disabled={isBefore()}>New session</button>
+        <button className={`submit-btn button ${isBefore() ? "dimmed" : ""}`} type="submit" disabled={isBefore()}>New session</button>
 
       </form>
     </section>

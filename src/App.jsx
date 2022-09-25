@@ -134,7 +134,7 @@ const App = () => {
 
   // ----- answer timer -----
   useEffect(() => {
-    if (!activeTimer ||  mode !== modes.answering || parameters.limitAnswaringTime) return; 
+    if (!activeTimer ||  mode !== modes.answering || parameters.limitAnsweringTime) return; 
     if (counter  > currentTimerTarget()) { // check if timer is finished
       handleTimerFinishes()
     }

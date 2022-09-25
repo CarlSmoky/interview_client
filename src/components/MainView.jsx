@@ -4,7 +4,7 @@ import Button from './Button';
 import { modes } from '../helpers/modes';
 
 const answerText = "Answering: ";
-const prepText = "Preparaton: ";
+const prepText = "Preparation: ";
 
 
 const MainView = ({ currentQuestion, indexOfQuestion, handleMainButton, handlePauseButton, mode, counter, parameters, mainButtonEnabled, mainButtonText, endSession }) => {
@@ -15,10 +15,10 @@ const MainView = ({ currentQuestion, indexOfQuestion, handleMainButton, handlePa
         <div className={`timer__box-1 dimmed`}  >
         </div>
         <div className={`timer__box-2 ${mode === modes.prep ? "" : "dimmed"}`} >
-        {mode === modes.prep && <Counter counter={counter} text={prepText} displayCounter={!parameters.limitPreparationTime} />}
+        {mode === modes.prep && <Counter counter={counter} text={prepText} shouldDisplayCounter={!parameters.limitPreparationTime} />}
         </div>
         <div className={`timer__box-3 ${mode === modes.answering ? "" : "dimmed"}`} >
-        {mode === modes.answering && <Counter counter={counter} text={answerText} displayCounter={!parameters.limitAnswaringTime} />}
+        {mode === modes.answering && <Counter counter={counter} text={answerText} shouldDisplayCounter={!parameters.limitAnsweringTime} />}
         </div>
 
 

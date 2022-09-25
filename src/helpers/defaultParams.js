@@ -4,8 +4,8 @@ const defaultParam = {
   answeringTime: 10,
   readingQuestionTime: 5,
   limitPreparationTime: true,
-  limitAnswaringTime: true,
+  limitAnsweringTime: true,
 }
-let checkboxParams =  ["limitPreparationTime","limitAnswaringTime"];
+let checkboxParams =  ["limitPreparationTime","limitAnsweringTime"];
 
 export {defaultParam, checkboxParams};
