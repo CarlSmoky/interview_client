@@ -192,6 +192,7 @@ const App = () => {
   }
 
   const mainButtonEnabled = () => {
+    if (mode === modes.before) { return false }
     return indexOfQuestion < questions.length - 1 || mode === modes.prep || mode === modes.answering;
   }
 
@@ -204,8 +205,7 @@ const App = () => {
   }
 
   const endSession = () => {
-    setMode(modes.before);
-    resetTimer();
+    setMode(modes.before);    
   }
 
   return (
