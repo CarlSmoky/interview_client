@@ -1,10 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react';
+import axios from 'axios';
+import "./sass/main.scss";
+
 import Header from './components/Header';
 import Footer from './components/Footer';
 import SessionSettings from './components/SessionSettings';
 import MainView from './components/MainView';
-import axios from 'axios';
-import "./sass/main.scss";
 
 import { shuffle } from './helpers/shuffle-helper';
 import { modes } from './helpers/modes';
@@ -190,7 +191,7 @@ const App = () => {
     setTimer(true);
   }
 
-  const nextEnabled = () => {
+  const mainButtonEnabled = () => {
     return indexOfQuestion < questions.length - 1 || mode === modes.prep || mode === modes.answering;
   }
 
@@ -204,9 +205,8 @@ const App = () => {
 
   const endSession = () => {
     setMode(modes.before);
+    resetTimer();
   }
-
-
 
   return (
     <div className="App">
@@ -227,7 +227,7 @@ const App = () => {
           handlePauseButton={handlePauseButton}
           parameters={parameters}
           mode={mode}
-          nextEnabled={nextEnabled}
+          mainButtonEnabled={mainButtonEnabled}
           mainButtonText={mainButtonText}
           endSession={endSession}
         />
