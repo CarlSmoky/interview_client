@@ -117,7 +117,12 @@ const Form = ({ parameters, handleOnChange, start, defaultChecked, isChecked, is
           </div>
         </div>
 
-        <button className={`submit-btn button ${isBefore() ? "dimmed" : ""}`} type="submit" disabled={isBefore()}>New session</button>
+        <button
+          className={`submit-btn button ${isBefore() ? "dimmed" : ""}`} type="submit"
+          disabled={isBefore()}
+        >
+          New session
+        </button>
 
       </form>
     </section>
