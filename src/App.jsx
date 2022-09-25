@@ -8,13 +8,33 @@ import "./sass/main.scss";
 
 import { shuffle } from './helpers/shuffle-helper';
 import { modes } from './helpers/modes';
+import { defaultParam, checkboxParams} from './helpers/defaultParams';
 
 const App = () => {
 
+  const [mode, setMode] = useState(modes.before);
+  
   //Fetch all questions when it load
   const [allQuestions, setAllQuestions] = useState();
+  const [parameters, setParameters] = useState({
+    ...defaultParam
+  });
 
-  // on first render
+  //When submit btn clicked, set question accoring params
+  const [questions, setQuestions] = useState([]);
+  const [indexOfQuestion, setIndexOfQuestion] = useState(0);
+  const [currentQuestion, setCurrentQuestion] = useState("");
+  
+  // For both timers
+  const [counter, setCounter] = useState(0);
+  const prepCounterRef = useRef(0);
+  const answerCounterRef = useRef(0);
+
+  // For pause:
+  const [activeTimer, setActiveTimer] = useState(false);
+  const activeTimerRef = useRef(false);
+
+  // On first render
   useEffect(() => {
     const endpoints = {
       "QUESTIONS": `http://localhost:3001/api/questions`,
@@ -26,47 +46,18 @@ const App = () => {
       setTimer(false);
   }, []);
 
-  const defaultParam = {
-    numberOfQuestion: 4,
-    preparingTime: 10,
-    answeringTime: 10,
-    readingQuestionTime: 5
-  }
-
-  const [parameters, setParameters] = useState({
-    ...defaultParam
-  });
-
   const handleOnChange = (event) => {
     const { name, value } = event.target;
     setParameters((prev) => {
+      console.log(!parameters[name] );
+      const newParam = checkboxParams.includes(name) ? !parameters[name] : parseInt(value);
+      
       return {
         ...prev,
-        [name]: parseInt(value) || value
+        [name]: newParam,
       };
     });
   }
-
-  //When submit btn clicked, set question accoring to Num of question and start counter
-  const [questions, setQuestions] = useState([]);
-  const [indexOfQuestion, setIndexOfQuestion] = useState(0);
-  const [currentQuestion, setCurrentQuestion] = useState("");
-  // for both timers
-  const [counter, setCounter] = useState(0);
-  const prepCounterRef = useRef(0);
-  const answerCounterRef = useRef(0);
-
-  // for pause:
-  const [activeTimer, setActiveTimer] = useState(false);
-  const activeTimerRef = useRef(false);
-
-  const [mode, setMode] = useState(modes.before);
-
-  const [checked, setChecked] = useState(
-    {
-      limitPreparationTime: true,
-      limitAnswaringTime: true,
-    });
 
   const startSession = (event) => {
     event.preventDefault();
@@ -126,7 +117,7 @@ const App = () => {
 
 // ----- PREP TIMER -----
   useEffect(() => {
-    if (!activeTimer || mode !== modes.prep || checked.limitPreparationTime) return; 
+    if (!activeTimer || mode !== modes.prep || parameters.limitPreparationTime) return; 
     if (counter > currentTimerTarget()) { // check if timer is finished
       handleTimerFinishes()
     }
@@ -142,7 +133,7 @@ const App = () => {
 
   // ----- answer timer -----
   useEffect(() => {
-    if (!activeTimer ||  mode !== modes.answering || checked.limitAnswaringTime) return; 
+    if (!activeTimer ||  mode !== modes.answering || parameters.limitAnswaringTime) return; 
     if (counter  > currentTimerTarget()) { // check if timer is finished
       handleTimerFinishes()
     }
@@ -203,18 +194,8 @@ const App = () => {
     return indexOfQuestion < questions.length - 1 || mode === modes.prep || mode === modes.answering;
   }
 
-  const checkUnlimit = (event) => {
-    const { name } = event.target;
-    setChecked((prev) => {
-      return {
-        ...prev,
-        [name]: !checked[name]
-      };
-    });
-  }
-
   const isChecked = (nameOfInput) => {
-    return checked[nameOfInput];
+    return parameters[nameOfInput];
   }
 
   const isBefore = () => {
@@ -235,8 +216,6 @@ const App = () => {
           handleOnChange={handleOnChange}
           startSession={startSession}
           parameters={parameters}
-          defaultChecked={checked}
-          checkUnlimit={checkUnlimit}
           isChecked={isChecked}
           isBefore={isBefore}
         />
@@ -246,7 +225,7 @@ const App = () => {
           counter={counter}
           handleNextButton={handleNextButton}
           handlePauseButton={handlePauseButton}
-          unlimitedTime={checked}
+          parameters={parameters}
           mode={mode}
           nextEnabled={nextEnabled}
           mainButtonText={mainButtonText}

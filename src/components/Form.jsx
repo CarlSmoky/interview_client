@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Form = ({ parameters, handleOnChange, start, defaultChecked, checkUnlimit, isChecked, isBefore }) => {
+const Form = ({ parameters, handleOnChange, start, defaultChecked, isChecked, isBefore }) => {
 
   return (
     <section className="section-configration">
@@ -20,7 +20,7 @@ const Form = ({ parameters, handleOnChange, start, defaultChecked, checkUnlimit,
           <h3 className="heading-tertiary" >Preparation Counter</h3>
           <div className="config-box">
             <label className={`label-primary ${isChecked('limitPreparationTime') ? "" : "dimmed"}`} htmlFor="limitPreparationTime">  Unlimited preparation time</label>
-            <input type="checkbox" id="limitPreparationTime" name="limitPreparationTime" value="limitPreparationTime" defaultChecked={defaultChecked.limitPreparationTime} onChange={checkUnlimit} disabled={isBefore()}/>
+            <input type="checkbox" id="limitPreparationTime" name="limitPreparationTime" value="limitPreparationTime" defaultChecked={parameters.limitPreparationTime} onChange={handleOnChange} disabled={isBefore()}/>
           </div>
           <div className={`config-box ${isChecked('limitPreparationTime') ? "dimmed" : ""}`}>
             <label className="label-primary" htmlFor="preparingTime">Preparation time: </label>
@@ -36,7 +36,7 @@ const Form = ({ parameters, handleOnChange, start, defaultChecked, checkUnlimit,
           <h3 className="heading-tertiary" >Answer Counter</h3>
           <div className="config-box">
             <label className={`label-primary ${isChecked('limitAnswaringTime') ? "" : "dimmed"}`} htmlFor="limitAnswaringTime"> Unlimited answaring time</label>
-            <input type="checkbox" id="limitAnswaringTime" name="limitAnswaringTime" value="limitAnswaringTime" defaultChecked={defaultChecked.limitAnswaringTime} onChange={checkUnlimit} disabled={isBefore()}/>
+            <input type="checkbox" id="limitAnswaringTime" name="limitAnswaringTime" value="limitAnswaringTime" defaultChecked={parameters.limitAnswaringTime} onChange={handleOnChange} disabled={isBefore()}/>
           </div>
           <div className={`config-box ${isChecked('limitAnswaringTime') ? "dimmed" : ""}`}>
             <label className="label-primary" htmlFor="answeringTime">Answering time: </label>

@@ -7,7 +7,7 @@ const answerText = "Answering: ";
 const prepText = "Preparaton: ";
 
 
-const MainView = ({ currentQuestion, indexOfQuestion, handleNextButton, handlePauseButton, mode, counter, unlimitedTime, nextEnabled, mainButtonText, endSession }) => {
+const MainView = ({ currentQuestion, indexOfQuestion, handleNextButton, handlePauseButton, mode, counter, parameters, nextEnabled, mainButtonText, endSession }) => {
 
   return (
     <section className="section-main_view">
@@ -15,10 +15,10 @@ const MainView = ({ currentQuestion, indexOfQuestion, handleNextButton, handlePa
         <div className={`timer__box-1 dimmed`}  >
         </div>
         <div className={`timer__box-2 ${mode === modes.prep ? "" : "dimmed"}`} >
-        {mode === modes.prep && <Counter counter={counter} text={prepText} displayCounter={!unlimitedTime.limitPreparationTime} />}
+        {mode === modes.prep && <Counter counter={counter} text={prepText} displayCounter={!parameters.limitPreparationTime} />}
         </div>
         <div className={`timer__box-3 ${mode === modes.answering ? "" : "dimmed"}`} >
-        {mode === modes.answering && <Counter counter={counter} text={answerText} displayCounter={!unlimitedTime.limitAnswaringTime} />}
+        {mode === modes.answering && <Counter counter={counter} text={answerText} displayCounter={!parameters.limitAnswaringTime} />}
         </div>
 
 

@@ -7,7 +7,7 @@ const SessionSettings = ({handleOnChange, startSession, parameters, defaultCheck
       handleOnChange={handleOnChange}
       start={startSession}
       parameters={parameters}
-      defaultChecked={defaultChecked} checkUnlimit={checkUnlimit}
+      defaultChecked={defaultChecked}
       isChecked={isChecked}
       isBefore={isBefore}
       />
