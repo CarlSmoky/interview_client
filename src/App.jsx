@@ -205,7 +205,28 @@ const App = () => {
   }
 
   const endSession = () => {
-    setMode(modes.before);    
+    setMode(modes.before);
+    setCurrentQuestion("");
+  }
+
+  const isTimerActive = () => {
+    console.log("call");
+    return activeTimerRef.current;
+  }
+
+  const isPauseButtonEnabled = () => {
+    console.log("call");
+    if (mode === modes.before || mode === modes.finished) {
+      return false;
+    }
+    if (mode === modes.prep) {
+      return !parameters.limitPreparationTime;
+    }
+
+    if (mode === modes.answering) {
+      return !parameters.limitAnsweringTime;
+    }
+    
   }
 
   return (
@@ -230,6 +251,9 @@ const App = () => {
           mainButtonEnabled={mainButtonEnabled}
           mainButtonText={mainButtonText}
           endSession={endSession}
+          isTimerActive={isTimerActive}
+          isPauseButtonEnabled={isPauseButtonEnabled}
+
         />
       </div>
       <Footer />
