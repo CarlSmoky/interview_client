@@ -15,24 +15,38 @@ const MainView = ({ currentQuestion, indexOfQuestion, handleMainButton, handlePa
         <div className={`timer__box-1 dimmed`}  >
         </div>
         <div className={`timer__box-2 ${mode === modes.prep ? "" : "dimmed"}`} >
-        {mode === modes.prep && <Counter counter={counter} text={prepText} shouldDisplayCounter={!parameters.limitPreparationTime} />}
+          {mode === modes.prep &&
+            <Counter
+              counter={counter}
+              text={prepText}
+              shouldDisplayCounter={!parameters.limitPreparationTime}
+            />
+          }
         </div>
         <div className={`timer__box-3 ${mode === modes.answering ? "" : "dimmed"}`} >
-        {mode === modes.answering && <Counter counter={counter} text={answerText} shouldDisplayCounter={!parameters.limitAnsweringTime} />}
+          {mode === modes.answering &&
+            <Counter
+            counter={counter}
+            text={answerText}
+            shouldDisplayCounter={!parameters.limitAnsweringTime}
+            />
+          }
         </div>
 
 
       </div>
-      {<Question question={currentQuestion} num={indexOfQuestion} isDimmed={mode === modes.finished} />}
-      <button onClick={handlePauseButton}>pause</button>
+      {<Question
+          question={currentQuestion}
+          num={indexOfQuestion}
+          isDimmed={mode === modes.finished}
+      />}
       <Button
-        mainButtonEnabled={mainButtonEnabled} handleMainButton={handleMainButton}
+        mainButtonEnabled={mainButtonEnabled}
+        handleMainButton={handleMainButton}
         mainButtonText={mainButtonText}
       />
-      <div className="counter_box">
-        
-        
-      </div>
+      <button onClick={handlePauseButton}>pause</button>
+      <button onClick={endSession}>Stop</button>
     </section>
   )
 }
