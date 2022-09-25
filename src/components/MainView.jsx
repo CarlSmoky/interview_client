@@ -1,18 +1,13 @@
 import Question from './Question';
 import Counter from './Counter';
 import Button from './Button';
+import { modes } from '../helpers/modes';
 
 const answerText = "Answering: ";
-const prepText = "Preparaton: "
+const prepText = "Preparaton: ";
+
 
 const MainView = ({ currentQuestion, indexOfQuestion, handleNextButton, handlePauseButton, mode, counter, unlimitedTime, nextEnabled, mainButtonText, endSession }) => {
-
-  const modes = {
-    before: "before",
-    prep: "prep",
-    answering: "answering",
-    finished: "finished"
-  };
 
   return (
     <section className="section-main_view">

@@ -7,15 +7,9 @@ import axios from 'axios';
 import "./sass/main.scss";
 
 import { shuffle } from './helpers/shuffle-helper';
+import { modes } from './helpers/modes';
 
 const App = () => {
-
-  const modes = {
-    before: "before",
-    prep: "prep",
-    answering: "answering",
-    finished: "finished"
-  };
 
   //Fetch all questions when it load
   const [allQuestions, setAllQuestions] = useState();
