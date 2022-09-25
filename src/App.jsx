@@ -6,7 +6,7 @@ import MainView from './components/MainView';
 import axios from 'axios';
 import "./sass/main.scss";
 
-import { shuffle } from './helpers/shuffle-helper'
+import { shuffle } from './helpers/shuffle-helper';
 
 const App = () => {
 
@@ -19,7 +19,6 @@ const App = () => {
 
   //Fetch all questions when it load
   const [allQuestions, setAllQuestions] = useState();
-  const [nextEnabled, setNextEnabled] = useState(false);
 
   // on first render
   useEffect(() => {
@@ -35,7 +34,7 @@ const App = () => {
 
   const defaultParam = {
     numberOfQuestion: 4,
-    preparingTime: 5,
+    preparingTime: 10,
     answeringTime: 10,
     readingQuestionTime: 5
   }
@@ -60,7 +59,8 @@ const App = () => {
   const [currentQuestion, setCurrentQuestion] = useState("");
   // for both timers
   const [counter, setCounter] = useState(0);
-  const counterRef = useRef(0);
+  const prepCounterRef = useRef(0);
+  const answerCounterRef = useRef(0);
 
   // for pause:
   const [activeTimer, setActiveTimer] = useState(false);
@@ -68,7 +68,6 @@ const App = () => {
 
   const [mode, setMode] = useState(modes.before);
 
-  // not yet being used
   const [checked, setChecked] = useState(
     {
       limitPreparationTime: true,
@@ -80,50 +79,90 @@ const App = () => {
     const selectedQuestions = shuffle(allQuestions, parameters.numberOfQuestion);
     setQuestions(selectedQuestions);
     setMode(modes.prep);
+    setIndexOfQuestion(0);
     setCurrentQuestion(selectedQuestions[0].question);
     resetTimer()
   };
 
   const startNewQuestion = () => {
-    console.log("pressed new q");
     const newQuestionIndex = indexOfQuestion + 1;
     setIndexOfQuestion(newQuestionIndex);
     setCurrentQuestion(questions[newQuestionIndex].question);
     setMode(modes.prep);
     resetTimer()
-    enableNextButton(false);
   }
 
-  // can delete this and access setNextEnabled directly, wrapper function
-  const enableNextButton = (isEnabled) => {
-    setNextEnabled(isEnabled);
+  const handleNextButton = () => {
+    if (mode === modes.prep) {
+      setMode(modes.answering);
+      resetTimer();
+      console.log("move to answering");
+    } else if (mode === modes.answering) {
+      handleTransitionToFinished()
+    } else if (mode === modes.finished) {
+      startNewQuestion();
+    } 
   }
 
-  // Next Button:
-  // in prep: move to answering
-  // in answering: move to finished
-  // in finished: start new question
-  // (currently it always calls startNewQuestion)
+  const mainButtonText = () => {
+    if (mode === modes.prep) {
+      return "Start answer";
+    } else if (mode === modes.answering) {
+      return "Done";
+    } else if (mode === modes.finished) {
+      return "Next";
+    } else {
+      return "--"
+    }
+  }
 
-  // Pause Button:
-  // call toggleTimer()
+  const handlePauseButton = () => {
+    toggleTimer();
+  }
 
+  const handleTransitionToFinished = () => {
+    if (indexOfQuestion < questions.length - 1) {
+      console.log("fo to finished");
+      setMode(modes.finished);
+    } else {
+      console.log("starting over...");
+      setMode(modes.before);
+    }
+  }
 
-// --- TIMER ---
+// ----- PREP TIMER -----
   useEffect(() => {
-    if (!activeTimer) return; // check if timer is paused
-    console.log("counter", counter, "target", currentTimerTarget());
+    if (!activeTimer || mode !== modes.prep || checked.limitPreparationTime) return; 
     if (counter > currentTimerTarget()) { // check if timer is finished
       handleTimerFinishes()
     }
 
     setTimeout(() => {
       if (activeTimerRef.current) { // make sure we're not paused
-        setCounter(counter + 1);
-        counterRef.current = counter + 1;
+        const newTime = prepCounterRef.current + 1;
+        prepCounterRef.current = newTime;
+        setCounter(newTime);
       }
     }, 1000);
   }, [counter, activeTimer]);
+
+  // ----- answer timer -----
+  useEffect(() => {
+    if (!activeTimer ||  mode !== modes.answering || checked.limitAnswaringTime) return; 
+    if (counter  > currentTimerTarget()) { // check if timer is finished
+      handleTimerFinishes()
+    }
+
+    setTimeout(() => {
+      if (activeTimerRef.current) { // make sure we're not paused
+        const newTime = answerCounterRef.current + 1;
+        answerCounterRef.current = newTime;
+        setCounter(newTime);
+      }
+    }, 1000);
+  }, [counter, activeTimer]);
+
+
 
   const handleTimerFinishes = () => {
     console.log("handle finish fired", mode);
@@ -131,7 +170,7 @@ const App = () => {
       setMode(modes.answering);
       resetTimer();
     } else if (mode === modes.answering) {
-      setMode(modes.finished);
+      handleTransitionToFinished()
       setTimer(false);
     }
   }
@@ -148,15 +187,8 @@ const App = () => {
     activeTimerRef.current = isOn;
   }
 
-  // current timer target depends on mode
-
-
-  /*
-  if you call currentTimerTarget(), it will give the time limit for the current mode
-  if yoy call currentTimerTarget(modes.prep), it will give the time limit for parameters.preparingTime
-  */
-  const currentTimerTarget = (newMode) => {
-    const currentMode = newMode || mode;
+  const currentTimerTarget = () => {
+    const currentMode = mode;
 
     if (currentMode === modes.prep) {
       return parameters.preparingTime;
@@ -166,13 +198,15 @@ const App = () => {
   }
 
   const resetTimer = () => {
-    setTimer(true);
+    setTimer(false);
     setCounter(0);
-    counterRef.current = 0;
+    prepCounterRef.current = 0;
+    answerCounterRef.current = 0;
+    setTimer(true);
   }
 
-  const hasRemainingQuestions = () => {
-    return indexOfQuestion < questions.length - 1;
+  const nextEnabled = () => {
+    return indexOfQuestion < questions.length - 1 || mode === modes.prep || mode === modes.answering;
   }
 
   const checkUnlimit = (event) => {
@@ -183,6 +217,18 @@ const App = () => {
         [name]: !checked[name]
       };
     });
+  }
+
+  const isChecked = (nameOfInput) => {
+    return checked[nameOfInput];
+  }
+
+  const isBefore = () => {
+    return mode !== modes.before;
+  }
+
+  const endSession = () => {
+    setMode(modes.before);
   }
 
 
@@ -197,18 +243,20 @@ const App = () => {
           parameters={parameters}
           defaultChecked={checked}
           checkUnlimit={checkUnlimit}
-          checked={checked}
+          isChecked={isChecked}
+          isBefore={isBefore}
         />
         <MainView
           currentQuestion={currentQuestion}
           indexOfQuestion={indexOfQuestion}
-          prepareCounter={mode === modes.prep && counter}
-          prepTime={currentTimerTarget()}
-          answerCounter={mode === modes.answering && counter}
-          // readingCounter={currentTimerTarget()}
-          nextEnabled={nextEnabled}
-          startNewQuestion={startNewQuestion}
+          counter={counter}
+          handleNextButton={handleNextButton}
+          handlePauseButton={handlePauseButton}
+          unlimitedTime={checked}
           mode={mode}
+          nextEnabled={nextEnabled}
+          mainButtonText={mainButtonText}
+          endSession={endSession}
         />
       </div>
       <Footer />

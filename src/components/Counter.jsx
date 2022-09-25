@@ -1,10 +1,11 @@
 import React from 'react'
 
-const Counter = ({counter, text}) => {
+const Counter = ({counter, text, displayCounter}) => {
   
   return (
     <div className="counter">
-      <p className="counter__text">{text} {counter}</p>
+      <p className="counter__text">{displayCounter ? `${text} ${counter}` : ""}
+        </p>
     </div>
   )
 }
