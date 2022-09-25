@@ -1,12 +1,12 @@
 import React from 'react';
 
 
-const Button = ({handleNextButton, nextEnabled, mainButtonText}) => {
+const Button = ({handleMainButton, nextEnabled, mainButtonText}) => {
   
 
   return (
     <div>
-      <button className={`button next_btn ${nextEnabled() ? "" : "dimmed"}`} onClick={handleNextButton} disabled={!nextEnabled()}>{mainButtonText()}</button>
+      <button className={`button next_btn ${nextEnabled() ? "" : "dimmed"}`} onClick={handleMainButton} disabled={!nextEnabled()}>{mainButtonText()}</button>
     </div>
   )
 }

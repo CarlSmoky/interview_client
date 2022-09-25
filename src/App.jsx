@@ -77,7 +77,7 @@ const App = () => {
     resetTimer()
   }
 
-  const handleNextButton = () => {
+  const handleMainButton = () => {
     if (mode === modes.prep) {
       setMode(modes.answering);
       resetTimer();
@@ -97,7 +97,7 @@ const App = () => {
     } else if (mode === modes.finished) {
       return "Next";
     } else {
-      return "--"
+      return "_"; //Need to change
     }
   }
 
@@ -223,7 +223,7 @@ const App = () => {
           currentQuestion={currentQuestion}
           indexOfQuestion={indexOfQuestion}
           counter={counter}
-          handleNextButton={handleNextButton}
+          handleMainButton={handleMainButton}
           handlePauseButton={handlePauseButton}
           parameters={parameters}
           mode={mode}

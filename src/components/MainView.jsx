@@ -7,7 +7,7 @@ const answerText = "Answering: ";
 const prepText = "Preparaton: ";
 
 
-const MainView = ({ currentQuestion, indexOfQuestion, handleNextButton, handlePauseButton, mode, counter, parameters, nextEnabled, mainButtonText, endSession }) => {
+const MainView = ({ currentQuestion, indexOfQuestion, handleMainButton, handlePauseButton, mode, counter, parameters, nextEnabled, mainButtonText, endSession }) => {
 
   return (
     <section className="section-main_view">
@@ -26,7 +26,7 @@ const MainView = ({ currentQuestion, indexOfQuestion, handleNextButton, handlePa
       {<Question question={currentQuestion} num={indexOfQuestion} isDimmed={mode === modes.finished} />}
       <button onClick={handlePauseButton}>pause</button>
       <Button
-        nextEnabled={nextEnabled} handleNextButton={handleNextButton}
+        nextEnabled={nextEnabled} handleMainButton={handleMainButton}
         mainButtonText={mainButtonText}
       />
       <div className="counter_box">
