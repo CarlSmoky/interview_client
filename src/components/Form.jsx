@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 const Form = ({ parameters, handleOnChange, start, defaultChecked, isChecked, isBefore }) => {
 
@@ -10,8 +10,21 @@ const Form = ({ parameters, handleOnChange, start, defaultChecked, isChecked, is
         {/* Number of Question */}
         <div className="setting-wrapper">
           <div className="config-box">
-            <label className="label-primary" htmlFor='numberOfQuestion'>Number of questions: </label>
-            <input className='config-box__input' type="number" name='numberOfQuestion' onChange={handleOnChange} value={parameters.numberOfQuestion} min="1" max="100" disabled={isBefore()} />
+            <label
+              className="label-primary"
+              htmlFor="numberOfQuestion">
+              Number of questions:
+            </label>
+            <input
+              className="config-box__input"
+              type="number"
+              name="numberOfQuestion"
+              onChange={handleOnChange}
+              value={parameters.numberOfQuestion}
+              min="1"
+              max="50"
+              disabled={isBefore()}
+            />
           </div>
         </div>
 
@@ -19,13 +32,42 @@ const Form = ({ parameters, handleOnChange, start, defaultChecked, isChecked, is
         <div className="setting-wrapper">
           <h3 className="heading-tertiary" >Preparation Counter</h3>
           <div className="config-box">
-            <label className={`label-primary ${isChecked('limitPreparationTime') ? "" : "dimmed"}`} htmlFor="limitPreparationTime">  Unlimited preparation time</label>
-            <input type="checkbox" id="limitPreparationTime" name="limitPreparationTime" value="limitPreparationTime" defaultChecked={parameters.limitPreparationTime} onChange={handleOnChange} disabled={isBefore()}/>
+            <label
+              className={`label-primary ${isChecked("limitPreparationTime") ? "" : "dimmed"}`}
+              htmlFor="limitPreparationTime"
+            >
+              No limit time
+            </label>
+            <input
+              type="checkbox"
+              id="limitPreparationTime"
+              name="limitPreparationTime"
+              value="limitPreparationTime"
+              defaultChecked={parameters.limitPreparationTime}
+              onChange={handleOnChange}
+              disabled={isBefore()}
+            />
           </div>
-          <div className={`config-box ${isChecked('limitPreparationTime') ? "dimmed" : ""}`}>
-            <label className="label-primary" htmlFor="preparingTime">Preparation time: </label>
+          <div className={`config-box ${isChecked("limitPreparationTime") ? "dimmed" : ""}`}>
+            <label
+              className="label-primary"
+              htmlFor="preparingTime"
+            >
+              Preparation time:
+            </label>
             <div className="time-box">
-              <input className="config-box__input" type="number" min="0" max="300" name='preparingTime' onChange={handleOnChange} value={parameters.preparingTime} maxLength="2" size="4" disabled={isChecked('limitPreparationTime') || isBefore()} />
+              <input
+                className="config-box__input"
+                type="number"
+                min="0"
+                max="300"
+                name="preparingTime"
+                onChange={handleOnChange}
+                value={parameters.preparingTime}
+                maxLength="2"
+                size="4"
+                disabled={isChecked("limitPreparationTime") || isBefore()}
+              />
               <span className="unit">seconds</span>
             </div>
           </div>
@@ -35,13 +77,41 @@ const Form = ({ parameters, handleOnChange, start, defaultChecked, isChecked, is
         <div className="setting-wrapper">
           <h3 className="heading-tertiary" >Answer Counter</h3>
           <div className="config-box">
-            <label className={`label-primary ${isChecked('limitAnsweringTime') ? "" : "dimmed"}`} htmlFor="limitAnsweringTime"> Unlimited answaring time</label>
-            <input type="checkbox" id="limitAnsweringTime" name="limitAnsweringTime" value="limitAnsweringTime" defaultChecked={parameters.limitAnsweringTime} onChange={handleOnChange} disabled={isBefore()}/>
+            <label
+              className={`label-primary ${isChecked("limitAnsweringTime") ? "" : "dimmed"}`}
+              htmlFor="limitAnsweringTime"
+            >
+              No limit time
+            </label>
+            <input
+              type="checkbox"
+              id="limitAnsweringTime"
+              name="limitAnsweringTime"
+              value="limitAnsweringTime"
+              defaultChecked={parameters.limitAnsweringTime}
+              onChange={handleOnChange}
+              disabled={isBefore()}
+            />
           </div>
-          <div className={`config-box ${isChecked('limitAnsweringTime') ? "dimmed" : ""}`}>
-            <label className="label-primary" htmlFor="answeringTime">Answering time: </label>
+          <div className={`config-box ${isChecked("limitAnsweringTime") ? "dimmed" : ""}`}>
+            <label
+              className="label-primary"
+              htmlFor="answeringTime"
+            >
+              Answering time:
+            </label>
             <div className="time-box">
-              <input className='config-box__input' type="number" min="0" max="300" name='answeringTime' onChange={handleOnChange} value={parameters.answeringTime} maxLength="2" size="4" disabled={isChecked('limitAnsweringTime') || isBefore()} />
+              <input
+                className="config-box__input"
+                type="number"
+                min="0" max="300"
+                name='answeringTime'
+                onChange={handleOnChange}
+                value={parameters.answeringTime}
+                maxLength="2"
+                size="4"
+                disabled={isChecked("limitAnsweringTime") || isBefore()}
+              />
               <span className="unit">seconds</span>
             </div>
           </div>
