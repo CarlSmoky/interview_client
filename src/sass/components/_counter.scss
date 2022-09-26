@@ -15,7 +15,7 @@
   width: 100%;
 
   &__box {
-    
+
     &-1 {
       background-color: $color-primary-light;
       width: 50%;
@@ -26,7 +26,7 @@
 
       &::before {
         content: "Preparation";
-        
+
       }
     }
 
@@ -48,9 +48,4 @@
 
 .dimmed {
   opacity: 20%;
-}
-
-.circle-button {
-  width: 10rem;
-  border-radius: 10rem;
 }

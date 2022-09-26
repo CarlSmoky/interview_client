@@ -5,7 +5,7 @@ const Button = ({handleMainButton, mainButtonEnabled, mainButtonText}) => {
   
 
   return (
-    <div>
+    
       <button
         className={`button main_btn ${mainButtonEnabled() ? "" : "dimmed"}`}
         onClick={handleMainButton}
@@ -13,7 +13,7 @@ const Button = ({handleMainButton, mainButtonEnabled, mainButtonText}) => {
       >
         {mainButtonText()}
       </button>
-    </div>
+    
   )
 }
 

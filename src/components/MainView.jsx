@@ -3,7 +3,7 @@ import Counter from './Counter';
 import Button from './Button';
 import { modes } from '../helpers/modes';
 
-const MainView = ({ currentQuestion, indexOfQuestion, handleMainButton, handlePauseButton, mode, counter, parameters, mainButtonEnabled, mainButtonText, endSession, isTimerActive, isPauseButtonEnabled}) => {
+const MainView = ({ currentQuestion, indexOfQuestion, handleMainButton, handlePauseButton, mode, counter, parameters, mainButtonEnabled, mainButtonText, endSession, isTimerActive, isPauseButtonEnabled }) => {
 
   const pauseButtonClassName = () => {
     let text = "fas ";
@@ -14,7 +14,7 @@ const MainView = ({ currentQuestion, indexOfQuestion, handleMainButton, handlePa
 
   return (
     <section className="section-main_view">
-      
+
       <div className="counter">
         <div className={`counter__box-1 ${mode === modes.prep ? "" : "dimmed"}`} >
           {mode === modes.prep &&
@@ -34,11 +34,7 @@ const MainView = ({ currentQuestion, indexOfQuestion, handleMainButton, handlePa
             />
           }
         </div>
-        <div className="pauseStartBtn" onClick={handlePauseButton}>
-          <button className="circle-button" disabled={!isPauseButtonEnabled()}>
-          <i className={pauseButtonClassName()}></i>
-          </button>
-        </div>
+
       </div>
 
       {<Question
@@ -47,16 +43,17 @@ const MainView = ({ currentQuestion, indexOfQuestion, handleMainButton, handlePa
         isDimmed={mode === modes.finished}
       />}
 
-      <Button
-        mainButtonEnabled={mainButtonEnabled}
-        handleMainButton={handleMainButton}
-        mainButtonText={mainButtonText}
-      />
-      <div className="controler">
-        
-        <button className="button" onClick={endSession}>Cancel</button>
+      <div className="button-container">
+        <Button
+          mainButtonEnabled={mainButtonEnabled}
+          handleMainButton={handleMainButton}
+          mainButtonText={mainButtonText}
+        />
+        <button className={`circle-button ${isPauseButtonEnabled() ? "" : "dimmed"}`} disabled={!isPauseButtonEnabled()} onClick={handlePauseButton}>
+          <i className={pauseButtonClassName()}></i>
+        </button>
+        <button className={`button cancel_btn ${mainButtonEnabled() ? "" : "dimmed"}`} onClick={endSession}>Cancel</button>
       </div>
-
     </section>
   )
 }
