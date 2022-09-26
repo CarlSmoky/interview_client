@@ -1,7 +1,7 @@
 .question {
   display: flex;
   flex-direction:column;
-  height: 55rem;;
+  height: 55rem;
   text-align: left;
   line-height: 5rem;
   border: 1px solid grey;
@@ -12,21 +12,54 @@
   &__number {
     font-size: $font-size-big;
     color: $color-grey-dark;
-    margin-top: 3rem;
+    margin-top: 2rem;
   }
 
   &__content {
     font-size: $font-size-grand;
     color: $color-grey-dark;
-    margin: 5rem 0 0 0;
+    margin: 4rem 0 0 0;
   }
   
 }
 
+@media screen and (max-width: 1400px) {
+  .question {
+    padding: 2rem 4rem;
+
+    &__number {
+      font-size: $font-size-medium;
+      margin-top: 2rem;
+    }
+    
+    &__content {
+      font-size: $font-size-big;
+    }
+  }
+}
+
 @media screen and (max-width: 800px) {
+  .question {
+    padding: 2rem 3rem;   
+  }
   
 }
 
 @media screen and (max-width: 500px) {
+  .question {
+
+    padding: 1rem 2rem;
+
+    &__number {
+      font-size: $default-font-size;
+      color: $color-grey-dark;
+      margin-top: 1rem;
+    }
   
+    &__content {
+      font-size: $font-size-big;
+      color: $color-grey-dark;
+      margin: 1rem 0 0 0;
+    }
+  }
 }
