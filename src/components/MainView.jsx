@@ -1,57 +1,58 @@
 import Question from './Question';
 import Counter from './Counter';
 import Button from './Button';
+import { modes } from '../helpers/modes';
 
-const answerText = "Answering remaining: ";
-const prepText = "Preparaton time: "
-const readingText = "Reading time: "
+const MainView = ({ currentQuestion, indexOfQuestion, handleMainButton, handlePauseButton, mode, counter, parameters, mainButtonEnabled, mainButtonText, endSession, isTimerActive, isPauseButtonEnabled }) => {
 
-const MainView = ({ currentQuestion, indexOfQuestion, prepareCounter, prepTime, answerCounter, readingCounter, nextEnabled, startNewQuestion }) => {
-
-  // helper functions
-  const showReadingTimer = () => {
-    return readingCounter > 0; 
-  }
-
-  const showPrepTimer = () => {
-    return prepareCounter > 0 
-  }
-
-  const showAnswerTimer = () => {
-    return answerCounter > 0;
-  }
-
-  const questionIsComplete = () => {
-    return !(
-      showAnswerTimer() || showPrepTimer()  || showReadingTimer()
-    )
+  const pauseButtonClassName = () => {
+    let text = "fas ";
+    text += isTimerActive() ? `fa-pause` : `fa-play`;
+    text += mode === modes.before ? "dimmed" : "";
+    return text;
   }
 
   return (
     <section className="section-main_view">
-      <div className="timer">
-        <div className={`timer__box-1 ${showReadingTimer() ? "" : "dimmed"}`}  >
-        {showReadingTimer() && <Counter counter={readingCounter} text={readingText} />}
-        </div>
-        <div className={`timer__box-2 ${showPrepTimer() ? "" : "dimmed"}`} >
-        {showPrepTimer() && <Counter counter={prepareCounter} text={prepText} />}
-        </div>
-        <div className={`timer__box-3 ${showAnswerTimer() ? "" : "dimmed"}`} >
-        {showAnswerTimer() && <Counter counter={answerCounter} text={answerText} />}
-        </div>
 
+      <div className="counter">
+        <div className={`counter__box-1 ${mode === modes.prep ? "" : "dimmed"}`} >
+          {mode === modes.prep &&
+            <Counter
+              counter={counter}
+              shouldDisplayCounter={!parameters.limitPreparationTime}
+              handleMainButton={handleMainButton}
+            />
+          }
+        </div>
+        <div className={`counter__box-2 ${mode === modes.answering ? "" : "dimmed"}`} >
+          {mode === modes.answering &&
+            <Counter
+              counter={counter}
+              shouldDisplayCounter={!parameters.limitAnsweringTime}
+              handleMainButton={handleMainButton}
+            />
+          }
+        </div>
 
       </div>
-      {<Question question={currentQuestion} num={indexOfQuestion} isDimmed={questionIsComplete()} />}
-      <button>Start answer</button>
-      <button>done</button>
-      <br />
-      <button>pause</button>
-      <Button nextEnabled={nextEnabled} start={startNewQuestion} />
-      
-      <div className="counter_box">
-        
-        
+
+      {<Question
+        question={currentQuestion}
+        num={indexOfQuestion}
+        isDimmed={mode === modes.finished}
+      />}
+
+      <div className="button-container">
+        <Button
+          mainButtonEnabled={mainButtonEnabled}
+          handleMainButton={handleMainButton}
+          mainButtonText={mainButtonText}
+        />
+        <button className={`circle-button ${isPauseButtonEnabled() ? "" : "dimmed"}`} disabled={!isPauseButtonEnabled()} onClick={handlePauseButton}>
+          <i className={pauseButtonClassName()}></i>
+        </button>
+        <button className={`button cancel_btn ${mainButtonEnabled() ? "" : "dimmed"}`} onClick={endSession}>Cancel</button>
       </div>
     </section>
   )

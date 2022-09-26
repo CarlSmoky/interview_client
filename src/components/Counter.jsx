@@ -1,11 +1,11 @@
-import React from 'react'
+import React from "react";
 
-const Counter = ({counter, text}) => {
-  
+const Counter = ({ counter, shouldDisplayCounter }) => {
+
   return (
-    <div className="counter">
-      <p className="counter__text">{text} {counter}</p>
-    </div>
+    <span className="counter__text">
+      {shouldDisplayCounter ? `${counter}` : ""}
+    </span>
   )
 }
 

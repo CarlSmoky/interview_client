@@ -1,16 +1,19 @@
-import React from 'react';
+import React from "react";
 
 
-const Button = ({start, pause, stop, nextEnabled}) => {
+const Button = ({handleMainButton, mainButtonEnabled, mainButtonText}) => {
   
 
   return (
-    <div>
-      {/* <button className="" onClick={start} >Start</button>
-      <button className="" onClick={pause} >Pause</button>
-      <button className="" onClick={stop} >Stop</button> */}
-      <button className="button next_btn" onClick={start} disabled={!nextEnabled}>Next</button>
-    </div>
+    
+      <button
+        className={`button main_btn ${mainButtonEnabled() ? "" : "dimmed"}`}
+        onClick={handleMainButton}
+        disabled={!mainButtonEnabled()}
+      >
+        {mainButtonText()}
+      </button>
+    
   )
 }
 
