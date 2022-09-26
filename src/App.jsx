@@ -118,6 +118,9 @@ const App = () => {
 
 // ----- PREP TIMER -----
   useEffect(() => {
+    if (parameters.limitPreparationTime && mode === modes.prep) {
+      setTimer(false); // guarentees that answering timer use effect gets called when timer is reactivated
+    }
     if (!activeTimer || mode !== modes.prep || parameters.limitPreparationTime) return; 
     if (counter > currentTimerTarget()) { // check if timer is finished
       handleTimerFinishes()
@@ -134,6 +137,7 @@ const App = () => {
 
   // ----- answer timer -----
   useEffect(() => {
+    console.log("answer timer use effect", activeTimer);
     if (!activeTimer ||  mode !== modes.answering || parameters.limitAnsweringTime) return; 
     if (counter  > currentTimerTarget()) { // check if timer is finished
       handleTimerFinishes()
@@ -210,12 +214,10 @@ const App = () => {
   }
 
   const isTimerActive = () => {
-    console.log("call");
     return activeTimerRef.current;
   }
 
   const isPauseButtonEnabled = () => {
-    console.log("call");
     if (mode === modes.before || mode === modes.finished) {
       return false;
     }
