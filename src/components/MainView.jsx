@@ -16,7 +16,7 @@ const MainView = ({ currentQuestion, indexOfQuestion, handleMainButton, handlePa
     <section className="section-main_view">
 
       <div className="counter">
-        <div className={`counter__box-1 ${mode === modes.prep ? "" : "dimmed"}`} >
+        <div className={`counter__box counter__box-1 ${mode === modes.prep ? "" : "dimmed"}`} >
           {mode === modes.prep &&
             <Counter
               counter={counter}
@@ -25,7 +25,7 @@ const MainView = ({ currentQuestion, indexOfQuestion, handleMainButton, handlePa
             />
           }
         </div>
-        <div className={`counter__box-2 ${mode === modes.answering ? "" : "dimmed"}`} >
+        <div className={`counter__box counter__box-2 ${mode === modes.answering ? "" : "dimmed"}`} >
           {mode === modes.answering &&
             <Counter
               counter={counter}
