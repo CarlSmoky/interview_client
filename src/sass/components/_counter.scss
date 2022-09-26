@@ -1,43 +1,37 @@
 .counter {
+  display: flex;
+  flex-direction: row;
+  height: 6rem;
+  width: 100%;
   text-align: left;
 
   &__text {
     font-size: $font-size-big;
     text-align: center;
-    padding: .8rem;
+    display: inline-block;
+    margin-left: 2rem;
   }
-}
-
-.counter {
-  display: flex;
-  flex-direction: row;
-  height: 6rem;
-  width: 100%;
 
   &__box {
-
+    width: 50%;
+    padding: 1rem 1rem 1rem 4rem;
+    text-align: center;
+    font-size: $default-font-size;
+    margin-bottom: 1rem;
+    color: $color-grey-dark;
+    border-radius: 5px;
+    
     &-1 {
       background-color: $color-primary-light;
-      width: 50%;
-      padding: 1rem;
-      text-align: left;
-      font-size: $default-font-size;
-      color: $color-grey-dark;
 
       &::before {
         content: "Preparation";
-
       }
     }
 
     &-2 {
-      background-color: #E6E3CA;
-      width: 50%;
-      padding: 1rem;
-      text-align: left;
-      font-size: $default-font-size;
-      color: $color-grey-dark;
-
+      background-color: $color-tertiary-light;
+      
       &::before {
         content: "Answer";
       }
