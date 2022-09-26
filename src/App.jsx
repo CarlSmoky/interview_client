@@ -50,7 +50,7 @@ const App = () => {
   const handleOnChange = (event) => {
     const { name, value } = event.target;
     setParameters((prev) => {
-      console.log(!parameters[name] );
+      // console.log(!parameters[name] );
       const newParam = checkboxParams.includes(name) ? !parameters[name] : parseInt(value);
       
       return {
@@ -82,7 +82,7 @@ const App = () => {
     if (mode === modes.prep) {
       setMode(modes.answering);
       resetTimer();
-      console.log("move to answering");
+      // console.log("move to answering");
     } else if (mode === modes.answering) {
       handleTransitionToFinished()
     } else if (mode === modes.finished) {
@@ -108,10 +108,10 @@ const App = () => {
 
   const handleTransitionToFinished = () => {
     if (indexOfQuestion < questions.length - 1) {
-      console.log("fo to finished");
+      // console.log("fo to finished");
       setMode(modes.finished);
     } else {
-      console.log("starting over...");
+      // console.log("starting over...");
       setMode(modes.before);
     }
   }
@@ -137,7 +137,7 @@ const App = () => {
 
   // ----- answer timer -----
   useEffect(() => {
-    console.log("answer timer use effect", activeTimer);
+    // console.log("answer timer use effect", activeTimer);
     if (!activeTimer ||  mode !== modes.answering || parameters.limitAnsweringTime) return; 
     if (counter  > currentTimerTarget()) { // check if timer is finished
       handleTimerFinishes()
@@ -155,7 +155,7 @@ const App = () => {
 
 
   const handleTimerFinishes = () => {
-    console.log("handle finish fired", mode);
+    // console.log("handle finish fired", mode);
     if (mode === modes.prep) {
       setMode(modes.answering);
       resetTimer();

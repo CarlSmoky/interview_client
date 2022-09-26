@@ -3,18 +3,52 @@
   flex-direction: row;
   justify-content: space-between;
   background-color: $color-primary;
-  height: 10rem;
-  // border-top: 1px solid grey;
-  padding: 2rem 15rem;
+  padding: 3rem 15rem;
   text-align: left;
+  
 
   &__icons {
-  text-align: right;
+    text-align: right;
 
     & a {
       font-size: $font-size-huge;
       color: $color-tertiary-dark;
       margin-left: 6rem;
+    }
+  }
+}
+
+@media screen and (max-width: 1400px) {
+  .footer {
+    padding: 3rem 5rem;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .footer {
+
+    padding: 2rem 3rem;
+    flex-direction: column-reverse;
+
+    &__icons {
+      text-align: center;
+
+      & a {
+        font-size: $font-size-huge;
+        margin: 4rem;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .footer {
+
+    &__icons {
+
+      & a {
+        margin: 3rem;
+      }
     }
   }
 }

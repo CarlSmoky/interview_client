@@ -11,12 +11,29 @@
   text-align: left;
 }
 
-.counter_box {
-  display: flex;
-  flex-direction:row;
-}
-
 .section-main_view {
   width: 100%;
   margin-left: 6rem;
+}
+
+@media screen and (max-width: 1400px) {
+  .home_container {
+  padding: 3rem 5rem;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .home_container {
+    flex-direction:column;
+    padding: 3rem 3rem;
+    }
+
+    .section-session_settings {
+      width: 100%;
+    }
+
+    .section-main_view {
+      margin-top: 3rem;
+      margin-left: 0;
+    }
 }
