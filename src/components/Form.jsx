@@ -22,9 +22,12 @@ const Form = ({ parameters, handleOnChange, start, defaultChecked, isChecked, is
               onChange={handleOnChange}
               value={parameters.numberOfQuestion}
               min="1"
-              max="50"
+              max="100"
+              maxLength="2"
+              size="4"
               disabled={isBefore()}
             />
+            
           </div>
         </div>
 
