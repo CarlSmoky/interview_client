@@ -15,7 +15,7 @@ import { defaultParam, checkboxParams } from "./helpers/defaultParams";
 import { defaultQuestions } from "./data";
 
 const App = () => {
-
+  
   const [mode, setMode] = useState(modes.before);
 
   //Fetch all questions when it load
