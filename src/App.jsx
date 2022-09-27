@@ -1,20 +1,23 @@
-import React, { useState, useEffect, useRef } from 'react';
-import axios from 'axios';
+import React, { useState, useEffect, useRef } from "react";
+// import axios from 'axios';
 import "./sass/main.scss";
 
-import Header from './components/Header';
-import Footer from './components/Footer';
-import SessionSettings from './components/SessionSettings';
-import MainView from './components/MainView';
+import Header from "./components/Header";
+import Footer from "./components/Footer";
+import SessionSettings from "./components/SessionSettings";
+import MainView from "./components/MainView";
 
-import { shuffle } from './helpers/shuffle-helper';
-import { modes } from './helpers/modes';
-import { defaultParam, checkboxParams} from './helpers/defaultParams';
+import { shuffle } from "./helpers/shuffle-helper";
+import { modes } from "./helpers/modes";
+import { defaultParam, checkboxParams } from "./helpers/defaultParams";
+
+//When it's not fetch from backend
+import { defaultQuestions } from "./data";
 
 const App = () => {
 
   const [mode, setMode] = useState(modes.before);
-  
+
   //Fetch all questions when it load
   const [allQuestions, setAllQuestions] = useState();
   const [parameters, setParameters] = useState({
@@ -25,7 +28,7 @@ const App = () => {
   const [questions, setQuestions] = useState([]);
   const [indexOfQuestion, setIndexOfQuestion] = useState(0);
   const [currentQuestion, setCurrentQuestion] = useState("");
-  
+
   // For both timers
   const [counter, setCounter] = useState(0);
   const prepCounterRef = useRef(0);
@@ -37,14 +40,19 @@ const App = () => {
 
   // On first render
   useEffect(() => {
-    const endpoints = {
-      "QUESTIONS": `http://localhost:3001/api/questions`,
-    }
-    axios.get(endpoints.QUESTIONS)
-      .then(response => {
-        setAllQuestions(response.data);
-      });
-      setTimer(false);
+    //Fetch data from backend
+    // const endpoints = {
+    //   "QUESTIONS": `http://localhost:3001/api/questions`,
+    // }
+    // axios.get(endpoints.QUESTIONS)
+    //   .then(response => {
+    //     setAllQuestions(response.data);
+    //   });
+
+    setTimer(false);
+
+    //When it's not fetch from backend
+    setAllQuestions(defaultQuestions);
   }, []);
 
   const handleOnChange = (event) => {
@@ -52,7 +60,7 @@ const App = () => {
     setParameters((prev) => {
       // console.log(!parameters[name] );
       const newParam = checkboxParams.includes(name) ? !parameters[name] : parseInt(value);
-      
+
       return {
         ...prev,
         [name]: newParam,
@@ -87,7 +95,7 @@ const App = () => {
       handleTransitionToFinished()
     } else if (mode === modes.finished) {
       startNewQuestion();
-    } 
+    }
   }
 
   const mainButtonText = () => {
@@ -98,7 +106,7 @@ const App = () => {
     } else if (mode === modes.finished) {
       return "Next";
     } else {
-      return "_"; //Need to change
+      return "Start answer";
     }
   }
 
@@ -116,12 +124,12 @@ const App = () => {
     }
   }
 
-// ----- PREP TIMER -----
+  // ----- PREP TIMER -----
   useEffect(() => {
     if (parameters.limitPreparationTime && mode === modes.prep) {
       setTimer(false); // guarentees that answering timer use effect gets called when timer is reactivated
     }
-    if (!activeTimer || mode !== modes.prep || parameters.limitPreparationTime) return; 
+    if (!activeTimer || mode !== modes.prep || parameters.limitPreparationTime) return;
     if (counter > currentTimerTarget()) { // check if timer is finished
       handleTimerFinishes()
     }
@@ -138,8 +146,8 @@ const App = () => {
   // ----- answer timer -----
   useEffect(() => {
     // console.log("answer timer use effect", activeTimer);
-    if (!activeTimer ||  mode !== modes.answering || parameters.limitAnsweringTime) return; 
-    if (counter  > currentTimerTarget()) { // check if timer is finished
+    if (!activeTimer || mode !== modes.answering || parameters.limitAnsweringTime) return;
+    if (counter > currentTimerTarget()) { // check if timer is finished
       handleTimerFinishes()
     }
 
@@ -165,13 +173,13 @@ const App = () => {
     }
   }
 
-//  --- TIMER HELPERS ---
+  //  --- TIMER HELPERS ---
 
   // pause will use this function
   const toggleTimer = () => {
     setTimer(!activeTimerRef.current);
   }
-  
+
   const setTimer = (isOn) => {
     setActiveTimer(isOn);
     activeTimerRef.current = isOn;
@@ -228,7 +236,7 @@ const App = () => {
     if (mode === modes.answering) {
       return !parameters.limitAnsweringTime;
     }
-    
+
   }
 
   return (
