@@ -62,7 +62,6 @@
 @media (max-width: 800px) {
   .button {
     padding: 10px 30px;
-    
   }
 
   .circle-button {
@@ -74,6 +73,14 @@
 
 @media (max-width: 500px) {
   .button {
+    padding: 1.5rem 2rem;
     font-size: $font-size-small;
+  }
+
+  .circle-button {
+    width: 6rem;
+    height: 4rem;
+    font-size: 1.5rem;
+    margin-top: 1.5rem;
   }
 }
