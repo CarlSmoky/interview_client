@@ -33,21 +33,33 @@ body {
   display: inline-block;
   font-family: $secondary-font;
   font-weight: $font-weight-small;
-  font-size: $font-size-medium;
+  font-size: $default-font-size;
   color: $color-tertiary-dark;
-  padding: 3rem 0 0 0
+  padding: 1rem 0 0 0
 }
 
 @media screen and (max-width: 800px) {
   .footer-text {
     text-align: center;
-    font-size: $default-font-size;
+    // font-size: $default-font-size;
   }
 }
 
 @media screen and (max-width: 500px) {
   .heading-secondary {
     font-size: $default-font-size;
+  }
+
+  .label-primary {
+    font-size: $default-font-size;
+  }
+
+  .heading-tertiary {
+    font-size: $default-font-size;
+  }
+
+  .footer-text {
+    font-size: $font-size-small;
   }
 }
 

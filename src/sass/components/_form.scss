@@ -12,12 +12,12 @@
   flex-direction: row;
   text-align: left;
   justify-content: space-between;
-  
+
 
   &__input {
     font-size: $font-size-big;
     color: $color-grey-dark-2;
-    text-align: center; 
+    text-align: center;
   }
 
 }
@@ -35,4 +35,13 @@
   font-size: $font-size-small;
   text-align: center;
   color: $color-grey-dark;
+}
+
+@media screen and (max-width: 500px) {
+  .config-box {
+
+    &__input {
+      font-size: $font-size-medium;
+    }
+  }
 }
