@@ -43,3 +43,16 @@
 .dimmed {
   opacity: 20%;
 }
+
+@media screen and (max-width: 1400px) {
+  
+}
+
+@media screen and (max-width: 800px) {
+  .counter {
+
+    &__box {
+      padding: 1rem;
+    }
+  }
+}

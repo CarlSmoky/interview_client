@@ -45,6 +45,11 @@ body {
   }
 }
 
+@media screen and (max-width: 500px) {
+  .heading-secondary {
+    font-size: $default-font-size;
+  }
+}
 
 //FONT SIZE
 // $default-font-size: 1.6rem;
