@@ -302,7 +302,7 @@ const defaultQuestions = [{
   question: "Tell me how you stay current in your field on new or evolving [insert technologies or programs]."
 },
 {
-  question: "Why are manholesround?"
+  question: "Why are manholes round?"
 },
 {
   question: "You’ve been given an elephant. You can’t give it away or sell it. What would you do with the elephant?"
