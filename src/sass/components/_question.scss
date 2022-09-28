@@ -6,7 +6,7 @@
   line-height: 5rem;
   border: 1px solid grey;
   border-radius: 10px;
-  padding: 3rem 8rem;
+  padding: 3rem 6rem;
 
 
   &__number {
@@ -18,7 +18,7 @@
   &__content {
     font-size: $font-size-grand;
     color: $color-grey-dark;
-    margin: 4rem 0 0 0;
+    margin: 2rem 0 0 0;
   }
   
 }
@@ -26,6 +26,7 @@
 @media screen and (max-width: 1400px) {
   .question {
     padding: 2rem 4rem;
+    line-height: 4.5rem;
 
     &__number {
       font-size: $font-size-medium;
@@ -40,15 +41,20 @@
 
 @media screen and (max-width: 800px) {
   .question {
-    padding: 2rem 3rem;   
+    padding: 2rem 3rem;
+    line-height: 4rem;
+
+    &__content {
+      margin: 1.5rem 0 0 0;
+    }
   }
   
 }
 
 @media screen and (max-width: 500px) {
   .question {
-
     padding: 1rem 2rem;
+    line-height: 3.5rem;
 
     &__number {
       font-size: $default-font-size;

@@ -332,7 +332,7 @@ const defaultQuestions = [{
   question: "What was the last gift you gave someone?"
 },
 {
-  question: "If you could compare yourself with any animal, which would it be and why"
+  question: "If you could compare yourself with any animal, which would it be and why?"
 },
 {
   question: "Give me an example of a time when you used your fact-finding skills to gain information needed to solve a problem.  Then tell me how you analyzed the information and came to a decision, if applicable."
