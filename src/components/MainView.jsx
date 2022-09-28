@@ -3,7 +3,7 @@ import Counter from './Counter';
 import Button from './Button';
 import { modes } from '../helpers/modes';
 
-const MainView = ({ currentQuestion, indexOfQuestion, handleMainButton, handlePauseButton, mode, counter, parameters, mainButtonEnabled, mainButtonText, endSession, isTimerActive, isPauseButtonEnabled }) => {
+const MainView = ({ mainViewRef, currentQuestion, indexOfQuestion, handleMainButton, handlePauseButton, mode, counter, parameters, mainButtonEnabled, mainButtonText, endSession, isTimerActive, isPauseButtonEnabled }) => {
 
   const pauseButtonClassName = () => {
     let text = "fas ";
@@ -13,7 +13,7 @@ const MainView = ({ currentQuestion, indexOfQuestion, handleMainButton, handlePa
   }
 
   return (
-    <section className="section-main_view">
+    <section className="section-main_view" ref={mainViewRef} >
 
       <div className="counter">
         <div className={`counter__box counter__box-1 ${mode === modes.prep ? "" : "dimmed"}`} >

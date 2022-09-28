@@ -1,8 +1,8 @@
 import Form from './Form';
 
-const SessionSettings = ({handleOnChange, startSession, parameters, defaultChecked, isChecked, isBefore}) => {
+const SessionSettings = ({sessionSettingsRef, handleOnChange, startSession, parameters, defaultChecked, isChecked, isBefore}) => {
   return (
-    <section className="section-session_settings"> 
+    <section className="section-session_settings" ref={sessionSettingsRef}> 
     <Form
       handleOnChange={handleOnChange}
       start={startSession}

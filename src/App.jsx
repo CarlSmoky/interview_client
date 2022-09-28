@@ -15,7 +15,7 @@ import { defaultParam, checkboxParams } from "./helpers/defaultParams";
 import { defaultQuestions } from "./data";
 
 const App = () => {
-  
+
   const [mode, setMode] = useState(modes.before);
 
   //Fetch all questions when it load
@@ -37,6 +37,10 @@ const App = () => {
   // For pause:
   const [activeTimer, setActiveTimer] = useState(false);
   const activeTimerRef = useRef(false);
+
+  //For scroll
+  const sessionSettingsRef = useRef(null);
+  const mainViewRef = useRef(null);
 
   // On first render
   useEffect(() => {
@@ -239,11 +243,25 @@ const App = () => {
 
   }
 
+  //scroll
+  useEffect(() => {
+    if (mode === modes.prep) {
+      mainViewRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+    if (mode === modes.before) {
+      sessionSettingsRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+
+  }, [mode])
+
+
+
   return (
     <div className="App">
       <Header />
       <div className="home_container">
         <SessionSettings
+          sessionSettingsRef={sessionSettingsRef}
           handleOnChange={handleOnChange}
           startSession={startSession}
           parameters={parameters}
@@ -251,6 +269,7 @@ const App = () => {
           isBefore={isBefore}
         />
         <MainView
+          mainViewRef={mainViewRef}
           currentQuestion={currentQuestion}
           indexOfQuestion={indexOfQuestion}
           counter={counter}
