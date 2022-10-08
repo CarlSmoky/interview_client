@@ -1,8 +1,8 @@
 import React from 'react';
 
-const Header = () => {
+const Header = ({headerRef}) => {
   return (
-    <header className="header">
+    <header className="header" ref={headerRef}>
       <img src="/logo.png" className="logo" alt="logo" />
     </header>
   )

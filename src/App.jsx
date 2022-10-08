@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useLayoutEffect } from "react";
 // import axios from 'axios';
 import "./sass/main.scss";
 
@@ -17,6 +17,7 @@ import { defaultQuestions } from "./data";
 const App = () => {
 
   const [mode, setMode] = useState(modes.before);
+  const [width, setWidth] = useState(0);
 
   //Fetch all questions when it load
   const [allQuestions, setAllQuestions] = useState();
@@ -39,8 +40,11 @@ const App = () => {
   const activeTimerRef = useRef(false);
 
   //For scroll
-  const sessionSettingsRef = useRef(null);
+  const viewportRef = useRef(null);
+  const headerRef = useRef(null);
   const mainViewRef = useRef(null);
+
+  const enableLogging = false;
 
   // On first render
   useEffect(() => {
@@ -57,6 +61,11 @@ const App = () => {
 
     //When it's not fetch from backend
     setAllQuestions(defaultQuestions);
+  }, []);
+
+  // On first render, check the viewport for scroll
+  useLayoutEffect(() => {
+    setWidth(viewportRef.current.offsetWidth);
   }, []);
 
   const handleOnChange = (event) => {
@@ -130,11 +139,16 @@ const App = () => {
 
   // ----- PREP TIMER -----
   useEffect(() => {
+    logger("prep timer - use effect entered")
     if (parameters.limitPreparationTime && mode === modes.prep) {
       setTimer(false); // guarentees that answering timer use effect gets called when timer is reactivated
     }
-    if (!activeTimer || mode !== modes.prep || parameters.limitPreparationTime) return;
+    if (!activeTimer || mode !== modes.prep || parameters.limitPreparationTime) {
+      logger("prep timer - returned: activeTimer: ", activeTimer, "mode: ", mode, "limitedPrep: ", parameters.limitPreparationTime);
+      return;
+    }
     if (counter > currentTimerTarget()) { // check if timer is finished
+      logger("prep timer - handleTimerFinishes() called")
       handleTimerFinishes()
     }
 
@@ -245,23 +259,26 @@ const App = () => {
 
   //scroll
   useEffect(() => {
-    if (mode === modes.prep) {
+    if (mode === modes.prep && width <= 800) {
       mainViewRef.current.scrollIntoView({ behavior: 'smooth' });
     }
-    if (mode === modes.before) {
-      sessionSettingsRef.current.scrollIntoView({ behavior: 'smooth' });
+    if (mode === modes.before && width <= 800) {
+      headerRef.current.scrollIntoView({ behavior: 'smooth' });
     }
-
   }, [mode])
 
-
+  // logging 
+  const logger = (logText) => {
+    if (enableLogging) {
+      console.log(logText);
+    }
+  }
 
   return (
-    <div className="App">
-      <Header />
+    <div className="App" ref={viewportRef}>
+      <Header headerRef={headerRef} />
       <div className="home_container">
         <SessionSettings
-          sessionSettingsRef={sessionSettingsRef}
           handleOnChange={handleOnChange}
           startSession={startSession}
           parameters={parameters}
@@ -282,7 +299,6 @@ const App = () => {
           endSession={endSession}
           isTimerActive={isTimerActive}
           isPauseButtonEnabled={isPauseButtonEnabled}
-
         />
       </div>
       <Footer />
