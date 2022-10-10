@@ -40,7 +40,6 @@ const Form = ({ parameters, handleOnChange, start, defaultChecked, isChecked, is
               htmlFor="limitPreparationTime"
             >
               No limit time
-              <span class="config-box__button"></span>
             </label>
             <input
               className="config-box__chcekbox"
@@ -87,7 +86,6 @@ const Form = ({ parameters, handleOnChange, start, defaultChecked, isChecked, is
               htmlFor="limitAnsweringTime"
             >
               No limit time
-              <span class="config-box__button"></span>
             </label>
             <input
               className="config-box__chcekbox"

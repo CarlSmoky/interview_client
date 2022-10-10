@@ -32,14 +32,14 @@
     border: 1.5px solid $color-grey-dark-4;
     border-radius: 50%;
     background-color: $color-grey-dark-4;
-  
-    &:checked{
-        background-color: $color-secondary-light;
-        border: 1.5px solid $color-grey-dark;
+
+    &:checked {
+      background-color: $color-secondary-light;
+      border: 1.3px solid $color-grey-dark;
     }
-  
-    &:focus{
-        outline: none !important;
+
+    &:focus {
+      outline: none !important;
     }
   }
 }
@@ -70,7 +70,10 @@
     }
 
     &__chcekbox[type=checkbox] {
-      margin-top: 4px;
+      margin-top: 5px;
+      width: 1.7rem;
+      height: 1.7rem;
+      padding: 2.5px;
     }
   }
 }
