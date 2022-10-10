@@ -42,6 +42,7 @@ const Form = ({ parameters, handleOnChange, start, defaultChecked, isChecked, is
               No limit time
             </label>
             <input
+              className="config-box__chcekbox"
               type="checkbox"
               id="limitPreparationTime"
               name="limitPreparationTime"
@@ -87,6 +88,7 @@ const Form = ({ parameters, handleOnChange, start, defaultChecked, isChecked, is
               No limit time
             </label>
             <input
+              className="config-box__chcekbox"
               type="checkbox"
               id="limitAnsweringTime"
               name="limitAnsweringTime"

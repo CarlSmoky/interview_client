@@ -5,14 +5,11 @@
   padding: 2rem;
 }
 
-
-
 .config-box {
   display: flex;
   flex-direction: row;
   text-align: left;
   justify-content: space-between;
-
 
   &__input {
     font-size: $font-size-big;
@@ -20,6 +17,31 @@
     text-align: center;
   }
 
+  &__chcekbox[type=checkbox] {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    /* create custom checkbox appearance */
+    display: inline-block;
+    width: 2rem;
+    height: 2rem;
+    padding: 3px;
+    margin-top: 6.5px;
+    /* background-color only for content */
+    background-clip: content-box;
+    border: 1.5px solid $color-grey-dark-4;
+    border-radius: 50%;
+    background-color: $color-grey-dark-4;
+
+    &:checked {
+      background-color: $color-secondary-light;
+      border: 1.3px solid $color-grey-dark;
+    }
+
+    &:focus {
+      outline: none !important;
+    }
+  }
 }
 
 .justify-start {
@@ -37,11 +59,21 @@
   color: $color-grey-dark;
 }
 
+
+
+
 @media screen and (max-width: 500px) {
   .config-box {
 
     &__input {
       font-size: $font-size-medium;
+    }
+
+    &__chcekbox[type=checkbox] {
+      margin-top: 5px;
+      width: 1.7rem;
+      height: 1.7rem;
+      padding: 2.5px;
     }
   }
 }
