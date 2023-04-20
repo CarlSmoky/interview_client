@@ -23,7 +23,7 @@ Ace the Interview! is an single-page application (SPA) for job seekers who want 
 $ git clone https://github.com/CarlSmoky/little_libraries_client
 ```
 
-2. Install packages`
+2. Install packages
 ```console
 $ cd interview_client
 $ npm install
