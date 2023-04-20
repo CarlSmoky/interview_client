@@ -21,7 +21,7 @@ Ace the Interview! is an single-page application (SPA) for job seekers who want 
 
 - Counter doesn't start sometimes
 
-### Instration
+### Installation
 1. Clone this repository
 ```console
 $ git clone https://github.com/CarlSmoky/little_libraries_client
