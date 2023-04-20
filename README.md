@@ -16,6 +16,8 @@ Ace the Interview! is an single-page application (SPA) for job seekers who want 
 <img src="https://img.shields.io/badge/Sass-CC6699?style=for-the-badge&logo=sass&logoColor=white" alt="sass">
 <img src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white" alt="HTML5">
 </div>
+###Current Issues
+- Counter doesn't start sometimes
 
 ### Instration
 1. Clone this repository
