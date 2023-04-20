@@ -1,14 +1,13 @@
 # Ace the Inteview!
-Ace the Interview is an single-page application (SPA) for job seekers who want to practice their interview skills. Questions are randomly chosen from a pool of over 200 questions and there are optional timers for preparing and answering questions. It attempts to replicate the experience of recorded video interview services (but without actually recording the answers.)
+Ace the Interview! is an single-page application (SPA) for job seekers who want to practice their interview skills. Questions are randomly chosen from a pool of over 200 questions and there are optional timers for preparing and answering questions. It attempts to replicate the experience of recorded video interview services (but without actually recording the answers.)
 
 - Please click here for the live website: [Live Demo: Ace the Interview!](https://acetheinterview.netlify.app/)
-- Check out server code here: [Back end](https://github.com/CarlSmoky/interview-server)
+- Check out server code here: [interview-server](https://github.com/CarlSmoky/interview-server)
 
 ## Final Product
 
-!["Desktop"](https://github.com/CarlSmoky/interview_client/blob/main/docs/Desktop.png?raw=true)
-
-!["Mobile"](https://github.com/CarlSmoky/interview_client/blob/main/docs/Mobile.png?raw=true)
+<img src="https://github.com/CarlSmoky/interview_client/blob/main/docs/Desktop.png?raw=true" alt="Desktop image" width="500px">
+<img src="https://github.com/CarlSmoky/interview_client/blob/main/docs/Mobile.png?raw=true" alt="Mobile image" height="400px">
 
 ### Tech Stacks
 <div>
@@ -21,7 +20,7 @@ Ace the Interview is an single-page application (SPA) for job seekers who want t
 ### Instration
 1. Clone this repository
 ```console
-$ git clone git@github.com:CarlSmoky/interview_client.git
+$ git clone https://github.com/CarlSmoky/little_libraries_client
 ```
 
 2. Install packages`
