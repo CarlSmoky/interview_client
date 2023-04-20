@@ -19,7 +19,7 @@ Ace the Interview! is an single-page application (SPA) for job seekers who want 
 
 ### Current Issues
 
-- Counter doesn't start sometimes
+- Occasional issue with counter (hard to reproduce)
 
 ### Installation
 1. Clone this repository
