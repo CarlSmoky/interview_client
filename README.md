@@ -26,7 +26,7 @@ Ace the Interview! is an single-page application (SPA) for job seekers who want 
 ### Installation
 1. Clone this repository
 ```console
-$ git clone https://github.com/CarlSmoky/little_libraries_client
+$ git clone git@github.com:CarlSmoky/interview_client.git
 ```
 
 2. Install packages
